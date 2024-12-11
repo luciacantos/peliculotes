@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Movie
 from django.contrib.auth.forms import UserCreationForm
 
-# Create your views here.
+# Create your views here.def home(request):
 def home(request):
     movies = Movie.objects.all()
     return render(request, 'movies/home.html', {'movies': movies})
