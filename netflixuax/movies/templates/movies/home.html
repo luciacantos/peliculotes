@@ -7,9 +7,11 @@
 </head>
 <body>
     {% if user.is_authenticated %}
-        <p>Hola, {{ user.username }} | <a href="{% url 'logout' %}">Cerrar sesión</a></p>
-    {% else %}
-        <p><a href="{% url 'login' %}">Iniciar sesión</a> | <a href="{% url 'register' %}">Registrarse</a></p>
+    <p>Hola, {{ user.username }}</p>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Cerrar sesión</button>
+    </form>
     {% endif %}
     <h1>Películas Populares</h1>
     <ul>
