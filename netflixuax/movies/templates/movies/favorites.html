@@ -1,0 +1,6 @@
+<h1>Mis películas favoritas</h1>
+<ul>
+    {% for favorite in favorites %}
+        <li>{{ favorite.movie.title }}</li>
+    {% endfor %}
+</ul>
