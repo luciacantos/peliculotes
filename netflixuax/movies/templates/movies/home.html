@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Películas Populares</title>
-</head>
-<body>
-    {% if user.is_authenticated %}
-    <p>Hola, {{ user.username }}</p>
-    <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Cerrar sesión</button>
-    </form>
-    {% endif %}
+{% extends 'movies/base.html' %}
+
+{% block title %}Películas Populares{% endblock %}
+
+{% block content %}
     <h1>Películas Populares</h1>
     <ul>
         {% for movie in movies %}
@@ -23,5 +13,4 @@
             </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,99 @@
+/* Formulario de inicio de sesión */
+form {
+    margin: 0 auto;
+    max-width: 400px;
+    font-family: Arial, sans-serif;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Cabecera */
+header {
+    background-color: #343a40; /* Color de fondo oscuro */
+    padding: 20px; /* Más espacio alrededor de la cabecera */
+    border-bottom: 2px solid #007bff; /* Línea inferior */
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+    align-items: center; /* Centrar los elementos verticalmente */
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav ul li a, header nav ul li button {
+    text-decoration: none;
+    color: white; /* Cambiar el color del texto */
+    font-size: 18px; /* Tamaño de fuente más grande */
+    font-family: 'Arial', sans-serif; /* Cambiar la fuente */
+    text-transform: uppercase; /* Convertir el texto a mayúsculas */
+    font-weight: bold; /* Negrita */
+    padding: 10px 15px;
+    transition: all 0.3s ease; /* Animación al pasar el cursor */
+}
+
+header nav ul li a:hover, header nav ul li button:hover {
+    background-color: #007bff; /* Cambiar el fondo al pasar el cursor */
+    color: white; /* Asegurarse de que el texto sea legible */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Botón para cerrar sesión */
+header nav ul li form button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-family: 'Arial', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 15px;
+}
+
+header nav ul li form button:hover {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Espaciado en el texto de bienvenida */
+header nav ul li:first-child {
+    margin-left: auto;
+}
