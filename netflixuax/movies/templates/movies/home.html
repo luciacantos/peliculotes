@@ -4,13 +4,14 @@
 
 {% block content %}
     <h1>Películas Populares</h1>
-    <ul>
+    <div class="movie-grid">
         {% for movie in movies %}
-            <li>
-                <h2>{{ movie.title }}</h2>
-                <p>{{ movie.overview }}</p>
+            <div class="movie-item">
                 <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
-            </li>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'add_movie' movie.id %}" class="add-btn">Añadir a Mi Lista</a>
+                {% endif %}
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

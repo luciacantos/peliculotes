@@ -4,7 +4,7 @@
 
 {% block content %}
 <div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;">
-    <h2 style="text-align: center; color: #007bff;">Iniciar sesión</h2>
+    <h2 style="text-align: center; color: pink;">Iniciar sesión</h2>
     <form method="post">
         {% csrf_token %}
         <div style="margin-bottom: 15px;">
@@ -15,13 +15,13 @@
             <label for="id_password" style="display: block; font-weight: bold;">Contraseña</label>
             <input type="password" name="password" id="id_password" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" required>
         </div>
-        <button type="submit" style="width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; font-size: 16px;">Iniciar sesión</button>
+        <button type="submit" style="width: 100%; padding: 10px; background: pink; color: white; border: none; border-radius: 4px; font-size: 16px;">Iniciar sesión</button>
     </form>
 
     <!-- Pregunta y botón de registro -->
     <div style="text-align: center; margin-top: 20px;">
         <p>¿No tienes una cuenta?</p>
-        <a href="{% url 'register' %}" style="display: inline-block; padding: 10px 15px; background: #28a745; color: white; text-decoration: none; border-radius: 4px;">Regístrate</a>
+        <a href="{% url 'register' %}" style="display: inline-block; padding: 10px 15px; background: #ca2799; color: white; text-decoration: none; border-radius: 4px;">Regístrate</a>
     </div>
 </div>
 {% endblock %}

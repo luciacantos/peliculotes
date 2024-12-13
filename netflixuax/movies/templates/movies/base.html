@@ -8,37 +8,39 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    <!-- Cabecera -->
     <header>
         <nav>
-            <ul>
-                <!-- Navegación principal -->
-                <li><a href="/">Películas</a></li>
-                <li><a href="#">Series</a></li>
-
-                <!-- Opciones de usuario -->
-                {% if user.is_authenticated %}
-                    <li>Bienvenido, {{ user.username }}</li>
-                    <li>
-                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
-                            {% csrf_token %}
-                            <button type="submit">Cerrar sesión</button>
-                        </form>
-                    </li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-                {% endif %}
+            <ul class="nav-container">
+                <!-- Nombre de usuario o marcador a la izquierda -->
+                <li class="user">
+                    {% if user.is_authenticated %}
+                        {{ user.username }}
+                    {% else %}
+                        &nbsp; <!-- Espacio invisible para mantener la estructura -->
+                    {% endif %}
+                </li>
+                <!-- Enlaces principales alineados a la derecha -->
+                <div class="nav-links">
+                    <li><a href="{% url 'home' %}">Películas</a></li>
+                    <li><a href="#">Series</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'my_list' %}">Mi Lista</a></li>
+                        <li>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit">Cerrar sesión</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                    {% endif %}
+                </div>
             </ul>
         </nav>
     </header>
 
-
-    <!-- Contenido principal -->
-    <main style="padding: 20px;">
+    <main>
         {% block content %}{% endblock %}
     </main>
 </body>
 </html>
-
-
-
