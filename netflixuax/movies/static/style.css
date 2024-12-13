@@ -1,7 +1,7 @@
 /* Fondo de la página */
 body {
     background-color: black; /* Fondo negro */
-    color: black; /* Texto predeterminado en negro */
+    color: rgb(255, 255, 255); /* Texto predeterminado en negro */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -42,7 +42,7 @@ header nav ul div.nav-links {
 header nav ul div.nav-links li a, 
 header nav ul div.nav-links li button {
     text-decoration: none;
-    color: black; /* Enlaces en negro */
+    color: rgb(255, 255, 255); /* Enlaces en negro */
     font-size: 18px;
     font-family: 'Arial', sans-serif;
     text-transform: uppercase;

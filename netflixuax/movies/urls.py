@@ -11,6 +11,6 @@ urlpatterns = [
     path('my_list/', my_list, name='my_list'),
     path('add_movie/<int:movie_id>/', add_movie, name='add_movie'),
     path('remove_favorite/<int:movie_id>/', remove_favorite, name='remove_favorite'),
-    path('add_series/<int:series_id>/', add_series, name='add_series'),
+    path('add_series/<int:series_id>/', add_series, name='add_to_list_series'),
     path('remove_favorite_series/<int:series_id>/', remove_favorite_series, name='remove_favorite_series'),
 ]
