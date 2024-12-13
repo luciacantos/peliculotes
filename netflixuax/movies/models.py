@@ -12,6 +12,21 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
+
+class Series(models.Model):
+    tmdb_id = models.IntegerField(unique=True)
+    title = models.CharField(max_length=255)
+    overview = models.TextField(blank=True)
+    release_date = models.DateField(null=True, blank=True)
+    poster_path = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.title
+
+
+
+
+
 # paara crear lista de peliculitas favoritas
 class FavouriteMovie(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -22,3 +37,4 @@ class FavouriteMovie(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.movie.title}"
+

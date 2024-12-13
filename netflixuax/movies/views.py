@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Movie, FavouriteMovie
+from .models import Movie, FavouriteMovie, Series
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
@@ -31,6 +31,10 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'movies/login.html', {'form': form})
 
+
+def series_view(request):
+    series_list = Series.objects.all()
+    return render(request, 'movies/series.html', {'series_list': series_list})
 
 @login_required
 def logout_view(request):

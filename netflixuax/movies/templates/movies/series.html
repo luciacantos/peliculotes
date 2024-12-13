@@ -1,0 +1,14 @@
+{% extends 'movies/base.html' %}
+
+{% block title %}Series{% endblock %}
+
+{% block content %}
+    <h1>Series Populares</h1>
+    <div class="movie-grid">
+        {% for serie in series_list %}
+            <div class="movie-item">
+                <img src="https://image.tmdb.org/t/p/w500{{ serie.poster_path }}" alt="{{ serie.title }}">
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
