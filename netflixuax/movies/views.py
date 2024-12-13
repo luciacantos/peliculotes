@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Movie, FavouriteMovie, Series, FavouriteSeries
+from .models import Movie, FavouriteMovie, Series, FavouriteSeries, ViewedMovie, ViewedSeries
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
@@ -35,6 +35,12 @@ def login_view(request):
 def series_view(request):
     series = Series.objects.all()
     return render(request, 'movies/series.html', {'series': series})
+
+def movie_detail(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    return render(request, 'movies/movie_detail.html', {
+        'movie': movie,  # Incluye el objeto película completo en el contexto
+    })
 
 @login_required
 def logout_view(request):
@@ -75,3 +81,31 @@ def remove_favorite_series(request, series_id):
     series = get_object_or_404(Series, id=series_id)
     FavouriteSeries.objects.filter(user=request.user, series=series).delete()
     return redirect('my_list')
+
+
+# peliculinchis y series que ya hs visto
+
+@login_required
+def mark_as_viewed_movie(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    # Eliminar de favoritos y agregar a vistas
+    FavouriteMovie.objects.filter(user=request.user, movie=movie).delete()
+    ViewedMovie.objects.get_or_create(user=request.user, movie=movie)
+    return redirect('my_list')
+
+@login_required
+def mark_as_viewed_series(request, series_id):
+    series = get_object_or_404(Series, id=series_id)
+    # Eliminar de favoritos y agregar a vistas
+    FavouriteSeries.objects.filter(user=request.user, series=series).delete()
+    ViewedSeries.objects.get_or_create(user=request.user, series=series)
+    return redirect('my_list')
+
+@login_required
+def viewed_list(request):
+    viewed_movies = ViewedMovie.objects.filter(user=request.user)
+    viewed_series = ViewedSeries.objects.filter(user=request.user)
+    return render(request, 'movies/viewed_list.html', {
+        'viewed_movies': viewed_movies,
+        'viewed_series': viewed_series
+    })

@@ -19,12 +19,19 @@
                         &nbsp; <!-- Espacio invisible para mantener la estructura -->
                     {% endif %}
                 </li>
+
+                <!-- Nombre de la página centrado -->
+                <li class="logo">
+                    <a href="{% url 'home' %}" class="logo-link">PELICULINCHIS</a>
+                </li>
+
                 <!-- Enlaces principales alineados a la derecha -->
                 <div class="nav-links">
                     <li><a href="{% url 'home' %}">Películas</a></li>
                     <li><a href="{% url 'series' %}">Series</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'my_list' %}">Mi Lista</a></li>
+                        <li><a href="{% url 'viewed_list' %}">Vistas</a></li>
                         <li>
                             <form method="post" action="{% url 'logout' %}">
                                 {% csrf_token %}
@@ -44,3 +51,4 @@
     </main>
 </body>
 </html>
+

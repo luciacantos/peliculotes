@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import register, home, my_list, add_movie, remove_favorite, series_view, remove_favorite_series, add_series
+from .views import register, home, my_list, add_movie, remove_favorite, series_view, remove_favorite_series, add_series, mark_as_viewed_movie, mark_as_viewed_series, viewed_list, movie_detail
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -13,4 +13,8 @@ urlpatterns = [
     path('remove_favorite/<int:movie_id>/', remove_favorite, name='remove_favorite'),
     path('add_series/<int:series_id>/', add_series, name='add_to_list_series'),
     path('remove_favorite_series/<int:series_id>/', remove_favorite_series, name='remove_favorite_series'),
+    path('mark_as_viewed_movie/<int:movie_id>/', mark_as_viewed_movie, name='mark_as_viewed_movie'),
+    path('mark_as_viewed_series/<int:series_id>/', mark_as_viewed_series, name='mark_as_viewed_series'),
+    path('viewed_list/', viewed_list, name='viewed_list'),
+    path('movie/<int:movie_id>/', movie_detail, name='movie_detail'),
 ]
