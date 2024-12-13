@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Movie, FavouriteMovie, Series
+from .models import Movie, FavouriteMovie, Series, FavouriteSeries
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
@@ -33,8 +33,8 @@ def login_view(request):
 
 
 def series_view(request):
-    series_list = Series.objects.all()
-    return render(request, 'movies/series.html', {'series_list': series_list})
+    series = Series.objects.all()
+    return render(request, 'movies/series.html', {'series': series})
 
 @login_required
 def logout_view(request):
@@ -43,8 +43,12 @@ def logout_view(request):
 
 @login_required
 def my_list(request):
-    favourites = FavouriteMovie.objects.filter(user=request.user)
-    return render(request, 'movies/my_list.html', {'favourites': favourites})
+    favourite_movies = FavouriteMovie.objects.filter(user=request.user)
+    favourite_series = FavouriteSeries.objects.filter(user=request.user)
+    return render(request, 'movies/my_list.html', {
+        'favourite_movies': favourite_movies,
+        'favourite_series': favourite_series
+    })
 
 @login_required
 def add_movie(request, movie_id):
@@ -56,4 +60,18 @@ def add_movie(request, movie_id):
 def remove_favorite(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
     FavouriteMovie.objects.filter(user=request.user, movie=movie).delete()
+    return redirect('my_list')
+
+
+# para añadir las series a la lista
+@login_required
+def add_series(request, series_id):
+    series = get_object_or_404(Series, id=series_id)
+    FavouriteSeries.objects.get_or_create(user=request.user, series=series)
+    return redirect('my_list')
+
+@login_required
+def remove_favorite_series(request, series_id):
+    series = get_object_or_404(Series, id=series_id)
+    FavouriteSeries.objects.filter(user=request.user, series=series).delete()
     return redirect('my_list')

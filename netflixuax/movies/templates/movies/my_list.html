@@ -3,18 +3,35 @@
 {% block title %}Mi Lista{% endblock %}
 
 {% block content %}
-<h1>Mi Lista</h1>
-{% if favourites %}
-    <div class="movie-grid">
-        {% for fav in favourites %}
-            <div class="movie-item">
-                <img src="https://image.tmdb.org/t/p/w500{{ fav.movie.poster_path }}" alt="{{ fav.movie.title }}">
-                <h3>{{ fav.movie.title }}</h3>
-                <a href="{% url 'remove_favorite' fav.movie.id %}" class="remove-btn">Eliminar</a>
-            </div>
-        {% endfor %}
-    </div>
-{% else %}
-    <p>No tienes películas en tu lista.</p>
-{% endif %}
+    <h1>Mi Lista</h1>
+
+    <h2>Películas</h2>
+    {% if favourite_movies %}
+        <div class="movie-grid">
+            {% for fav in favourite_movies %}
+                <div class="movie-item">
+                    <img src="https://image.tmdb.org/t/p/w500{{ fav.movie.poster_path }}" alt="{{ fav.movie.title }}">
+                    <h3>{{ fav.movie.title }}</h3>
+                    <a href="{% url 'remove_favorite' fav.movie.id %}" class="remove-btn">Eliminar</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No tienes películas en tu lista.</p>
+    {% endif %}
+
+    <h2>Series</h2>
+    {% if favourite_series %}
+        <div class="movie-grid">
+            {% for fav in favourite_series %}
+                <div class="movie-item">
+                    <img src="https://image.tmdb.org/t/p/w500{{ fav.series.poster_path }}" alt="{{ fav.series.title }}">
+                    <h3>{{ fav.series.title }}</h3>
+                    <a href="{% url 'remove_favorite_series' fav.series.id %}" class="remove-btn">Eliminar</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No tienes series en tu lista.</p>
+    {% endif %}
 {% endblock %}

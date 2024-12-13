@@ -1,13 +1,16 @@
 {% extends 'movies/base.html' %}
 
-{% block title %}Series{% endblock %}
+{% block title %}Series Populares{% endblock %}
 
 {% block content %}
     <h1>Series Populares</h1>
     <div class="movie-grid">
-        {% for serie in series_list %}
+        {% for series in series %}
             <div class="movie-item">
-                <img src="https://image.tmdb.org/t/p/w500{{ serie.poster_path }}" alt="{{ serie.title }}">
+                <img src="https://image.tmdb.org/t/p/w500{{ series.poster_path }}" alt="{{ series.title }}">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'add_to_list_series' series.id %}" class="add-btn">Añadir a Mi Lista</a>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
