@@ -12,9 +12,10 @@ class Command(BaseCommand):
                 tmdb_id=series_data['id'],
                 defaults={
                     'title': series_data['name'],
-                    'overview': series_data.get('overview', ''),
-                    'release_date': series_data.get('first_air_date', None),
-                    'poster_path': series_data.get('poster_path', ''),  # Asegúrate de que no sea None
-    }
-)
+                    'overview': series_data.get('overview'),
+                    'release_date': series_data.get('first_air_date'),
+                    'poster_path': series_data.get('poster_path'),
+                },
+            )
         self.stdout.write(self.style.SUCCESS('Series populares almacenadas correctamente.'))
+
