@@ -1,19 +1,8 @@
 {% extends 'movies/base.html' %}
 
-{% block title %}Películas populares{% endblock %}
-
+{% block title %}Inicio{% endblock %}
 
 {% block content %}
-    <h1>Películas Populares</h1>
-    <div class="movie-grid">
-        {% for movie in movies %}
-            <div class="movie-item">
-                <a href="{% url 'movie_detail' movie.id %}">
-                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}">
-                </a>
-                <h3>{{ movie.title }}</h3>
-            </div>
-        {% endfor %}
-    </div>
+<h1>Bienvenido a Peliculinchis</h1>
+<p>Explora películas y series.</p>
 {% endblock %}
-

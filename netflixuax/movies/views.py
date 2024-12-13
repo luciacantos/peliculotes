@@ -6,9 +6,14 @@ from django.contrib.auth import login, logout
 from .forms import CustomUserCreationForm
 
 
-def home(request):
+
+def home_view(request):
+    return render(request, 'movies/home.html')
+
+def movies_view(request):
     movies = Movie.objects.all()
-    return render(request, 'movies/home.html', {'movies': movies})
+    return render(request, 'movies/movies.html', {'movies': movies})
+
 
 def register(request):
     if request.method == 'POST':
@@ -88,11 +93,10 @@ def remove_favorite_series(request, series_id):
 @login_required
 def mark_as_viewed_movie(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
-    # Eliminar de favoritos y agregar a vistas
-    FavouriteMovie.objects.filter(user=request.user, movie=movie).delete()
     ViewedMovie.objects.get_or_create(user=request.user, movie=movie)
+    # Eliminar de la lista de favoritos
+    FavouriteMovie.objects.filter(user=request.user, movie=movie).delete()
     return redirect('my_list')
-
 @login_required
 def mark_as_viewed_series(request, series_id):
     series = get_object_or_404(Series, id=series_id)

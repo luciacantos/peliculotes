@@ -27,7 +27,7 @@
 
                 <!-- Enlaces principales alineados a la derecha -->
                 <div class="nav-links">
-                    <li><a href="{% url 'home' %}">Películas</a></li>
+                    <li><a href="{% url 'movies' %}">Películas</a></li>
                     <li><a href="{% url 'series' %}">Series</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'my_list' %}">Mi Lista</a></li>

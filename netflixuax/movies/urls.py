@@ -1,9 +1,11 @@
 from django.urls import path
-from .views import register, home, my_list, add_movie, remove_favorite, series_view, remove_favorite_series, add_series, mark_as_viewed_movie, mark_as_viewed_series, viewed_list, movie_detail
+from .views import register, home_view, my_list, add_movie, remove_favorite, series_view, movies_view, remove_favorite_series, add_series, mark_as_viewed_movie, mark_as_viewed_series, viewed_list, movie_detail
 from django.contrib.auth import views as auth_views
+from . import views
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', home_view, name='home'),
+    path('movies/', movies_view, name='movies'),
     path('series/', series_view, name='series'),
     path('register/', register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='movies/login.html'), name='login'),
@@ -13,7 +15,7 @@ urlpatterns = [
     path('remove_favorite/<int:movie_id>/', remove_favorite, name='remove_favorite'),
     path('add_series/<int:series_id>/', add_series, name='add_to_list_series'),
     path('remove_favorite_series/<int:series_id>/', remove_favorite_series, name='remove_favorite_series'),
-    path('mark_as_viewed_movie/<int:movie_id>/', mark_as_viewed_movie, name='mark_as_viewed_movie'),
+    path('mark_as_viewed_movie/<int:movie_id>/', views.mark_as_viewed_movie, name='mark_as_viewed_movie'),
     path('mark_as_viewed_series/<int:series_id>/', mark_as_viewed_series, name='mark_as_viewed_series'),
     path('viewed_list/', viewed_list, name='viewed_list'),
     path('movie/<int:movie_id>/', movie_detail, name='movie_detail'),

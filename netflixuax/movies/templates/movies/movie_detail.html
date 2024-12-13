@@ -13,6 +13,9 @@
         </div>
         {% if user.is_authenticated %}
         <a href="{% url 'add_movie' movie.id %}" class="add-btn">Añadir a Mi Lista</a>
+        <a href="{% url 'mark_as_viewed_movie' movie.id %}" class="view-btn">Vista</a>
+
+
         {% endif %}
     </div>
 </div>
