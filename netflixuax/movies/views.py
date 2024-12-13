@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from .forms import CustomUserCreationForm
+from django.db.models import Q
 
 
 
@@ -50,6 +51,15 @@ def movie_detail(request, movie_id):
 def series_detail(request, series_id):
     series = get_object_or_404(Series, id=series_id)
     return render(request, 'movies/series_detail.html', {'series': series})
+
+
+def home_view(request):
+    if request.user.is_authenticated:
+        liked_movies = ViewedMovie.objects.filter(user=request.user, liked=True).values_list('movie_id', flat=True)
+        suggestions = Movie.objects.filter(~Q(id__in=liked_movies))[:10]  # Excluir películas ya vistas
+    else:
+        suggestions = Movie.objects.all()[:10]  # Mostrar cualquier película para usuarios no autenticados
+    return render(request, 'movies/home.html', {'suggestions': suggestions})
 
 @login_required
 def logout_view(request):
@@ -117,3 +127,19 @@ def viewed_list(request):
         'viewed_movies': viewed_movies,
         'viewed_series': viewed_series
     })
+
+@login_required
+def like_movie(request, movie_id):
+    viewed_movie = ViewedMovie.objects.filter(user=request.user, movie_id=movie_id).first()
+    if viewed_movie:
+        viewed_movie.liked = True
+        viewed_movie.save()
+    return redirect('viewed_list')
+
+@login_required
+def dislike_movie(request, movie_id):
+    viewed_movie = ViewedMovie.objects.filter(user=request.user, movie_id=movie_id).first()
+    if viewed_movie:
+        viewed_movie.liked = False
+        viewed_movie.save()
+    return redirect('viewed_list')

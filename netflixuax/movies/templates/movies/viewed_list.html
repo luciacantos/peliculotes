@@ -1,36 +1,27 @@
 {% extends 'movies/base.html' %}
 
-{% block title %}Vistas{% endblock %}
+{% block title %}Películas vistas{% endblock %}
 
 {% block content %}
-    <h1>Vistas</h1>
-
-    <h2>Películas</h2>
-    {% if viewed_movies %}
-    <div class="movie-grid">
-        {% for viewed in viewed_movies %}
-            <div class="movie-item">
-                <img src="https://image.tmdb.org/t/p/w500{{ viewed.movie.poster_path }}" alt="{{ viewed.movie.title }}">
-                <h3>{{ viewed.movie.title }}</h3>
-            </div>
+<h1 style="text-align: center; color: pink;">Películas Vistas</h1>
+<div style="max-width: 800px; margin: 0 auto; color: white;">
+    <ul>
+        {% for movie in viewed_movies %}
+        <li style="margin-bottom: 20px; list-style: none;">
+            <h3>{{ movie.movie.title }}</h3>
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.movie.poster_path }}" alt="{{ movie.movie.title }}" style="width: 150px; border-radius: 8px;">
+            <p>{{ movie.movie.overview }}</p>
+            {% if movie.liked == True %}
+                <p style="color: green;">Está guapa!.</p>
+            {% elif movie.liked == False %}
+                <p style="color: red;">Vaya puta mierda</p>
+            {% else %}
+                <a href="{% url 'like_movie' movie.movie.id %}" style="color: green; text-decoration: none;">👍</a>
+                |
+                <a href="{% url 'dislike_movie' movie.movie.id %}" style="color: red; text-decoration: none;">👎/a>
+            {% endif %}
+        </li>
         {% endfor %}
-    </div>
-    {% else %}
-    <p>No tienes ninguna película marcada como vista.</p>
-    {% endif %}
-
-    <h2>Series</h2>
-    {% if viewed_series %}
-    <div class="movie-grid">
-        {% for viewed in viewed_series %}
-            <div class="movie-item">
-                <img src="https://image.tmdb.org/t/p/w500{{ viewed.series.poster_path }}" alt="{{ viewed.series.title }}">
-                <h3>{{ viewed.series.title }}</h3>
-            </div>
-        {% endfor %}
-    </div>
-    {% else %}
-    <p>No tienes ninguna serie marcada como vista.</p>
-    {% endif %}
-
+    </ul>
+</div>
 {% endblock %}

@@ -11,6 +11,23 @@
         <p style="font-size: 20px; font-family: 'Arial', sans-serif; margin-top: 20px; color: white;">
             Nos alegra tenerte aquí. Explora tus películas y series favoritas.
         </p>
+
+        <h2 style="margin-top: 40px; color: pink; font-size: 30px; text-shadow: 2px 2px 5px black;">
+            Sugerencias para ti
+        </h2>
+        <div class="movie-grid" style="margin-top: 30px;">
+            {% for movie in suggestions %}
+            <div class="movie-item" style="border: 1px solid pink; padding: 10px; border-radius: 8px; background-color: black;">
+                <a href="{% url 'movie_detail' movie.id %}">
+                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" style="border-radius: 8px;">
+                </a>
+                <h3 style="color: white; font-size: 18px; margin-top: 10px;">{{ movie.title }}</h3>
+            </div>
+            {% empty %}
+            <p style="color: white;">No tenemos sugerencias para ti en este momento. ¡Sigue explorando y calificando!</p>
+            {% endfor %}
+        </div>
+
     {% else %}
         <h1 style="font-size: 50px; font-family: 'Arial', sans-serif; color: pink; text-shadow: 2px 2px 5px black;">
             ¡Bienvenido a Peliculinchis!
@@ -22,3 +39,4 @@
     {% endif %}
 </div>
 {% endblock %}
+
