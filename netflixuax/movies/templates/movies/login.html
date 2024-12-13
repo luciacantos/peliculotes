@@ -3,26 +3,27 @@
 {% block title %}Iniciar sesión{% endblock %}
 
 {% block content %}
-<div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;">
+<div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid pink; border-radius: 8px; background: black; color: white;">
     <h2 style="text-align: center; color: pink;">Iniciar sesión</h2>
     <form method="post">
         {% csrf_token %}
         <div style="margin-bottom: 15px;">
-            <label for="id_username" style="display: block; font-weight: bold;">Usuario</label>
-            <input type="text" name="username" id="id_username" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" required>
+            <label for="id_username" style="display: block; font-weight: bold; color: white;">Usuario</label>
+            <input type="text" name="username" id="id_username" class="form-control" style="width: 100%; padding: 8px; border: 1px solid pink; border-radius: 4px; color: black;" required>
         </div>
         <div style="margin-bottom: 15px;">
-            <label for="id_password" style="display: block; font-weight: bold;">Contraseña</label>
-            <input type="password" name="password" id="id_password" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" required>
+            <label for="id_password" style="display: block; font-weight: bold; color: white;">Contraseña</label>
+            <input type="password" name="password" id="id_password" class="form-control" style="width: 100%; padding: 8px; border: 1px solid pink; border-radius: 4px; color: black;" required>
         </div>
-        <button type="submit" style="width: 100%; padding: 10px; background: pink; color: white; border: none; border-radius: 4px; font-size: 16px;">Iniciar sesión</button>
+        <button type="submit" style="width: 100%; padding: 10px; background: pink; color: black; border: none; border-radius: 4px; font-size: 16px;">Iniciar sesión</button>
     </form>
 
     <!-- Pregunta y botón de registro -->
     <div style="text-align: center; margin-top: 20px;">
-        <p>¿No tienes una cuenta?</p>
-        <a href="{% url 'register' %}" style="display: inline-block; padding: 10px 15px; background: #ca2799; color: white; text-decoration: none; border-radius: 4px;">Regístrate</a>
+        <p style="color: white;">¿No tienes una cuenta?</p>
+        <a href="{% url 'register' %}" style="display: inline-block; padding: 10px 15px; background: #ca2799; color: black; text-decoration: none; border-radius: 4px;">Regístrate</a>
     </div>
 </div>
 {% endblock %}
+
 

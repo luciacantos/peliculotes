@@ -12,7 +12,10 @@
             <p><strong>Fecha de lanzamiento:</strong> {{ series.release_date }}</p>
         </div>
         {% if user.is_authenticated %}
-        <a href="{% url 'add_series' series.id %}" class="add-btn">Añadir a Mi Lista</a>
+        <div class="buttons">
+            <a href="{% url 'add_series' series.id %}" class="add-btn">Añadir a Mi Lista</a>
+            <a href="{% url 'mark_as_viewed_series' series.id %}" class="view-btn">Vista</a>
+        </div>
         {% endif %}
     </div>
 </div>

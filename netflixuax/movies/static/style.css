@@ -1,7 +1,7 @@
 /* Fondo de la página */
 body {
     background-color: black; /* Fondo negro */
-    color: rgb(255, 255, 255); /* Texto predeterminado en blanco */
+    color: black; /* Texto predeterminado en negro */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -27,7 +27,7 @@ header nav ul li.user {
     margin-right: auto; /* Empuja los enlaces hacia la derecha */
     font-size: 18px;
     font-family: 'Arial', sans-serif;
-    color: white; /* Nombre de usuario en blanco */
+    color: black; /* Nombre de usuario en negro */
     text-transform: uppercase;
     font-weight: bold;
 }
@@ -42,7 +42,7 @@ header nav ul div.nav-links {
 header nav ul div.nav-links li a, 
 header nav ul div.nav-links li button {
     text-decoration: none;
-    color: rgb(255, 255, 255); /* Enlaces en blanco */
+    color: black; /* Enlaces en negro */
     font-size: 18px;
     font-family: 'Arial', sans-serif;
     text-transform: uppercase;
@@ -54,7 +54,7 @@ header nav ul div.nav-links li button {
 header nav ul div.nav-links li a:hover, 
 header nav ul div.nav-links li button:hover {
     background-color: #ff69b4; /* Fondo al pasar el cursor */
-    color: white; /* Texto blanco al pasar el cursor */
+    color: black; /* Texto negro al pasar el cursor */
     border-radius: 5px;
     cursor: pointer;
 }
@@ -68,7 +68,7 @@ header nav ul li form {
 header nav ul li form button {
     background: none;
     border: none;
-    color: white; /* Botón en blanco */
+    color: black; /* Botón en negro */
     font-size: 18px;
     font-family: 'Arial', sans-serif;
     text-transform: uppercase;
@@ -79,7 +79,7 @@ header nav ul li form button {
 
 header nav ul li form button:hover {
     background-color: #ff69b4;
-    color: white;
+    color: black;
     border-radius: 5px;
 }
 
@@ -89,45 +89,9 @@ header nav ul li {
     vertical-align: middle;
 }
 
-/* Grid de películas */
-.movie-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajusta las columnas según el espacio disponible */
-    gap: 20px; /* Espaciado entre las películas */
-    padding: 20px;
-}
-
-.movie-item {
-    border: none;
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: black; /* Fondo negro */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer; /* Muestra que el elemento es clicable */
-}
-
-.movie-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 10px; /* Bordes redondeados */
-}
-
-.movie-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Sombra blanca al pasar el cursor */
-}
-
-/* Título principal de la página */
-h1 {
-    font-family: 'Arial', sans-serif;
-    font-size: 24px;
-    text-transform: uppercase;
-    color: white;
-    margin: 0;
-    padding: 20px 0 5px 20px;
-    border-bottom: 2px solid #e41cb8;
-    text-align: left;
+/* Títulos y texto general */
+h1, h2, h3, h4, h5, h6, p, a, span {
+    color: black; /* Todo el texto en negro */
 }
 
 /* Detalle de película */
@@ -135,85 +99,25 @@ h1 {
     text-align: center;
     margin: 20px auto;
     max-width: 800px;
-    color: white;
-}
-
-.movie-detail img {
-    width: 300px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.movie-detail-info {
-    background-color: #333;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: left;
-    color: white;
+    color: black;
 }
 
 .movie-detail-info p {
     font-size: 16px;
     line-height: 1.5;
+    color: black; /* Asegura que los párrafos del detalle también sean negros */
 }
 
 /* Botones */
 .add-btn, .remove-btn, .view-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 15px;
-    font-size: 14px;
-    border-radius: 5px;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.3s ease;
+    color: black; /* Texto de botones en negro */
 }
-
-.add-btn {
-    background-color: pink;
-    color: white;
-}
-
-.remove-btn {
-    background-color: red;
-    color: white;
-}
-
-.view-btn {
-    background-color: green;
-    color: white;
-}
-
-.add-btn:hover {
-    background-color: #ff69b4;
-}
-
-.remove-btn:hover {
-    background-color: darkred;
-}
-
-.view-btn:hover {
-    background-color: darkgreen;
-}
-
 
 /* Estilo para el logo PELICULINCHIS */
-.logo {
-    margin: 0 auto; /* Centramos el logo */
-    font-size: 24px; /* Tamaño del texto */
-    font-weight: bold;
-}
-
 .logo-link {
-    text-decoration: none; /* Sin subrayado */
-    color: #e41cb8; /* Rosa fucsia */
-    text-transform: uppercase; /* Mayúsculas */
-    transition: none; /* Sin animación al pasar el cursor */
+    color: black; /* Texto del logo en negro */
 }
 
 .logo-link:hover {
-    color: #e41cb8; /* Mantiene el color fucsia al pasar el cursor */
-    cursor: pointer; /* Cambia el cursor a puntero */
+    color: black; /* Mantiene el color negro al pasar el cursor */
 }
-
-

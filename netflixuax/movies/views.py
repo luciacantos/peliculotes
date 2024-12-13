@@ -47,6 +47,10 @@ def movie_detail(request, movie_id):
         'movie': movie,  # Incluye el objeto película completo en el contexto
     })
 
+def series_detail(request, series_id):
+    series = get_object_or_404(Series, id=series_id)
+    return render(request, 'movies/series_detail.html', {'series': series})
+
 @login_required
 def logout_view(request):
     logout(request)
@@ -96,14 +100,14 @@ def mark_as_viewed_movie(request, movie_id):
     ViewedMovie.objects.get_or_create(user=request.user, movie=movie)
     # Eliminar de la lista de favoritos
     FavouriteMovie.objects.filter(user=request.user, movie=movie).delete()
-    return redirect('my_list')
+    return redirect('viewed_list')
 @login_required
 def mark_as_viewed_series(request, series_id):
     series = get_object_or_404(Series, id=series_id)
     # Eliminar de favoritos y agregar a vistas
     FavouriteSeries.objects.filter(user=request.user, series=series).delete()
     ViewedSeries.objects.get_or_create(user=request.user, series=series)
-    return redirect('my_list')
+    return redirect('viewed_list')
 
 @login_required
 def viewed_list(request):

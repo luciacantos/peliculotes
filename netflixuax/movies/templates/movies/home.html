@@ -3,6 +3,22 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-<h1>Bienvenido a Peliculinchis</h1>
-<p>Explora películas y series.</p>
+<div style="text-align: center; margin-top: 50px; color: pink;">
+    {% if user.is_authenticated %}
+        <h1 style="font-size: 50px; font-family: 'Arial', sans-serif; color: pink; text-shadow: 2px 2px 5px black;">
+            ¡Bienvenido, <span style="color: white; text-transform: uppercase;">{{ user.username }}</span>!
+        </h1>
+        <p style="font-size: 20px; font-family: 'Arial', sans-serif; margin-top: 20px; color: white;">
+            Nos alegra tenerte aquí. Explora tus películas y series favoritas.
+        </p>
+    {% else %}
+        <h1 style="font-size: 50px; font-family: 'Arial', sans-serif; color: pink; text-shadow: 2px 2px 5px black;">
+            ¡Bienvenido a Peliculinchis!
+        </h1>
+        <p style="font-size: 20px; font-family: 'Arial', sans-serif; margin-top: 20px; color: white;">
+            Por favor, <a href="{% url 'login' %}" style="color: pink; text-decoration: none;">inicia sesión</a> o 
+            <a href="{% url 'register' %}" style="color: pink; text-decoration: none;">regístrate</a> para disfrutar de la experiencia completa.
+        </p>
+    {% endif %}
+</div>
 {% endblock %}

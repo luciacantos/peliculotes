@@ -13,14 +13,11 @@ class Movie(models.Model):
         return self.title
 
 class Series(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=200)
     overview = models.TextField(null=True, blank=True)
+    poster_path = models.CharField(max_length=200, null=True, blank=True)
     release_date = models.DateField(null=True, blank=True)
-    poster_path = models.CharField(max_length=255, null=True, blank=True)
-    tmdb_id = models.IntegerField(unique=True)  # Este campo debe ser único si lo usas para identificar series.
-
-    def __str__(self):
-        return self.title
+    tmdb_id = models.IntegerField(unique=True, null=True)
 
 
 # paara crear lista de peliculitas favoritas
