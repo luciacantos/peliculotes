@@ -225,3 +225,29 @@ header nav ul li {
 h1, h2, h3, h4, h5, h6, p, a, span {
     color: white; /* Asegura que todo el texto sea visible */
 }
+
+
+/* Estilo del contenedor del carrusel */
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Estilo para cada imagen (slide) */
+.slide {
+    display: none;
+    position: relative;
+}
+
+/* Estilo para el texto en las imágenes */
+.slide .text {
+    color: pink;
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    text-shadow: 2px 2px 4px black;
+}

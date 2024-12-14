@@ -15,18 +15,32 @@
         <h2 style="margin-top: 40px; color: pink; font-size: 30px; text-shadow: 2px 2px 5px black;">
             Sugerencias para ti
         </h2>
-        <div class="movie-grid" style="margin-top: 30px;">
-            {% for movie in suggestions %}
-            <div class="movie-item" style="border: 1px solid pink; padding: 10px; border-radius: 8px; background-color: black;">
-                <a href="{% url 'movie_detail' movie.id %}">
-                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" style="border-radius: 8px;">
-                </a>
-                <h3 style="color: white; font-size: 18px; margin-top: 10px;">{{ movie.title }}</h3>
+        <div class="carousel-container" style="position: relative; max-width: 500px; margin: 30px auto; overflow: hidden;">
+            <div class="carousel" style="display: flex; transition: transform 0.5s ease-in-out;">
+                {% for movie in suggestions %}
+                <div class="carousel-item" style="min-width: 100%; text-align: center;">
+                    <a href="{% url 'movie_detail' movie.id %}">
+                        <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" style="border-radius: 8px; max-width: 100%; height: auto;">
+                    </a>
+                    <h3 style="color: white; font-size: 18px; margin-top: 10px;">{{ movie.title }}</h3>
+                </div>
+                {% empty %}
+                <p style="color: white;">No tenemos sugerencias para ti en este momento. ¡Sigue explorando y calificando!</p>
+                {% endfor %}
             </div>
-            {% empty %}
-            <p style="color: white;">No tenemos sugerencias para ti en este momento. ¡Sigue explorando y calificando!</p>
-            {% endfor %}
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const carousel = document.querySelector('.carousel');
+                const items = document.querySelectorAll('.carousel-item');
+                let index = 0;
+
+                setInterval(() => {
+                    index = (index + 1) % items.length;
+                    carousel.style.transform = `translateX(-${index * 100}%)`;
+                }, 3000);
+            });
+        </script>
 
     {% else %}
         <h1 style="font-size: 50px; font-family: 'Arial', sans-serif; color: pink; text-shadow: 2px 2px 5px black;">
@@ -39,4 +53,5 @@
     {% endif %}
 </div>
 {% endblock %}
+
 
