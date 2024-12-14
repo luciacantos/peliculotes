@@ -10,42 +10,40 @@ body {
 /* Cabecera */
 header {
     background-color: pink; /* Fondo rosa */
-    padding: 15px 20px; /* Espaciado alrededor de la cabecera */
+    padding: 10px 20px;
     border-bottom: 2px solid #e41cb8; /* Línea inferior */
     display: flex;
-    align-items: center; /* Alineación vertical de todos los elementos */
-    justify-content: space-between; /* Espacio entre el usuario, logo y enlaces */
-    position: relative; /* Para centrado absoluto del logo */
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Contenedor de la cabecera */
+.nav-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 /* Usuario a la izquierda */
-header nav ul.nav-container {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-}
-
-/* Nombre del usuario */
-header nav ul li.user {
+.user {
     font-size: 18px;
     font-family: 'Arial', sans-serif;
     color: white; /* Nombre de usuario en blanco */
     text-transform: uppercase;
     font-weight: bold;
-    margin-right: auto; /* Empuja el logo hacia el centro */
+    margin-right: auto;
 }
 
 /* Logo centrado */
-header nav ul li.logo {
-    position: absolute; /* Posición absoluta para centrado */
-    left: 50%;
-    transform: translateX(-50%);
+.logo {
+    flex-grow: 1;
+    text-align: center;
 }
 
-header nav ul li.logo .logo-link {
+.logo .logo-link {
     text-decoration: none;
     color: #e41cb8; /* Rosa fuerte */
     font-size: 24px;
@@ -54,26 +52,23 @@ header nav ul li.logo .logo-link {
     transition: color 0.3s ease;
 }
 
-header nav ul li.logo .logo-link:hover {
+.logo .logo-link:hover {
     color: #ff69b4; /* Cambia a rosa más claro al pasar el cursor */
 }
 
-/* Enlaces principales alineados a la derecha */
-header nav ul div.nav-links {
+/* Enlaces alineados a la derecha */
+.nav-links {
     display: flex;
-    align-items: center; /* Centra verticalmente los enlaces */
-    justify-content: flex-end; /* Alinea los enlaces a la derecha */
-    gap: 20px; /* Espaciado uniforme entre enlaces */
-    margin-left: auto;
+    gap: 20px;
 }
 
-header nav ul div.nav-links li {
+.nav-links li {
     list-style: none;
 }
 
-header nav ul div.nav-links li a {
+.nav-links a {
     text-decoration: none;
-    color: black; /* Enlaces en negro */
+    color: black;
     font-size: 18px;
     font-family: 'Arial', sans-serif;
     text-transform: uppercase;
@@ -82,41 +77,39 @@ header nav ul div.nav-links li a {
     transition: all 0.3s ease;
 }
 
-header nav ul div.nav-links li a:hover {
-    background-color: #ff69b4; /* Fondo al pasar el cursor */
-    color: white; /* Texto blanco al pasar el cursor */
+/* Página activa */
+.nav-links a.active, 
+.nav-links form button.active {
+    background-color: #ff69b4; /* Fondo rosa claro */
+    color: white; /* Texto blanco */
     border-radius: 5px;
-    cursor: pointer;
 }
 
-/* Botón para cerrar sesión */
-header nav ul li form {
-    margin: 0;
-    display: inline-block;
+/* Hover en los enlaces */
+.nav-links a:hover {
+    background-color: #ff69b4; /* Fondo al pasar el cursor */
+    color: white; /* Texto blanco */
+    border-radius: 5px;
 }
 
-header nav ul li form button {
+/* Botón de cerrar sesión */
+.nav-links form button {
     background: none;
     border: none;
-    color: white; /* Botón en blanco */
+    color: black;
     font-size: 18px;
     font-family: 'Arial', sans-serif;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
     padding: 5px 10px;
+    transition: all 0.3s ease;
 }
 
-header nav ul li form button:hover {
+.nav-links form button:hover {
     background-color: #ff69b4;
-    color: black; /* Texto en negro al pasar el cursor */
+    color: white; /* Texto en blanco al pasar el cursor */
     border-radius: 5px;
-}
-
-/* Espaciado general en la cabecera */
-header nav ul li {
-    display: inline-block;
-    vertical-align: middle;
 }
 
 
@@ -250,4 +243,62 @@ h1, h2, h3, h4, h5, h6, p, a, span {
     bottom: 8px;
     left: 16px;
     text-shadow: 2px 2px 4px black;
+}
+
+
+/* Contenedor para el contenido visto */
+.viewed-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajusta columnas según el espacio disponible */
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+/* Elementos individuales (películas o series) */
+.viewed-item {
+    background-color: #1a1a1a; /* Fondo oscuro para cada elemento */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.viewed-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.viewed-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Botones de calificación */
+.rating-buttons {
+    margin-top: 10px;
+}
+
+.rating-buttons a {
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.like-btn {
+    background-color: green;
+    color: white;
+}
+
+.dislike-btn {
+    background-color: red;
+    color: white;
+}
+
+.rating-buttons a:hover {
+    opacity: 0.8;
 }

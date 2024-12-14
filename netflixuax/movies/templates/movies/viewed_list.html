@@ -1,27 +1,55 @@
 {% extends 'movies/base.html' %}
 
-{% block title %}Películas vistas{% endblock %}
+{% block title %}Contenido Visto{% endblock %}
 
 {% block content %}
-<h1 style="text-align: center; color: pink;">Películas Vistas</h1>
-<div style="max-width: 800px; margin: 0 auto; color: white;">
-    <ul>
-        {% for movie in viewed_movies %}
-        <li style="margin-bottom: 20px; list-style: none;">
-            <h3>{{ movie.movie.title }}</h3>
-            <img src="https://image.tmdb.org/t/p/w500{{ movie.movie.poster_path }}" alt="{{ movie.movie.title }}" style="width: 150px; border-radius: 8px;">
-            <p>{{ movie.movie.overview }}</p>
-            {% if movie.liked == True %}
-                <p style="color: green;">Está guapa!.</p>
-            {% elif movie.liked == False %}
-                <p style="color: red;">Vaya puta mierda</p>
-            {% else %}
-                <a href="{% url 'like_movie' movie.movie.id %}" style="color: green; text-decoration: none;">👍</a>
-                |
-                <a href="{% url 'dislike_movie' movie.movie.id %}" style="color: red; text-decoration: none;">👎</a>
-            {% endif %}
-        </li>
-        {% endfor %}
-    </ul>
+<h1 style="text-align: center; color: pink;">Contenido Visto</h1>
+
+<!-- Películas vistas -->
+<h2 style="color: pink; text-align: center; margin-top: 20px;">Películas</h2>
+<div class="viewed-grid">
+    {% for movie in viewed_movies %}
+    <div class="viewed-item">
+        <h3>{{ movie.movie.title }}</h3>
+        <img src="https://image.tmdb.org/t/p/w500{{ movie.movie.poster_path }}" alt="{{ movie.movie.title }}">
+        <p>{{ movie.movie.overview }}</p>
+        {% if movie.liked == True %}
+            <p style="color: green;">Está guapa!.</p>
+        {% elif movie.liked == False %}
+            <p style="color: red;">Vaya puta mierda</p>
+        {% else %}
+            <div class="rating-buttons">
+                <a href="{% url 'like_movie' movie.movie.id %}" class="like-btn">👍</a>
+                <a href="{% url 'dislike_movie' movie.movie.id %}" class="dislike-btn">👎</a>
+            </div>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p style="text-align: center; color: white;">No has visto ninguna película aún.</p>
+    {% endfor %}
+</div>
+
+<!-- Series vistas -->
+<h2 style="color: pink; text-align: center; margin-top: 40px;">Series</h2>
+<div class="viewed-grid">
+    {% for series in viewed_series %}
+    <div class="viewed-item">
+        <h3>{{ series.series.title }}</h3>
+        <img src="https://image.tmdb.org/t/p/w500{{ series.series.poster_path }}" alt="{{ series.series.title }}">
+        <p>{{ series.series.overview }}</p>
+        {% if series.liked == True %}
+            <p style="color: green;">Está guapa!.</p>
+        {% elif series.liked == False %}
+            <p style="color: red;">Vaya puta mierda</p>
+        {% else %}
+            <div class="rating-buttons">
+                <a href="{% url 'like_series' series.series.id %}" class="like-btn">👍</a>
+                <a href="{% url 'dislike_series' series.series.id %}" class="dislike-btn">👎</a>
+            </div>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p style="text-align: center; color: white;">No has visto ninguna serie aún.</p>
+    {% endfor %}
 </div>
 {% endblock %}

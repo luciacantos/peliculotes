@@ -51,8 +51,6 @@ class ViewedMovie(models.Model):
 
 class ViewedSeries(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    series = models.ForeignKey('Series', on_delete=models.CASCADE)
-    liked = models.BooleanField(null=True, blank=True)  # Opcional para series
+    series = models.ForeignKey(Series, on_delete=models.CASCADE)
+    liked = models.BooleanField(null=True, blank=True)  # Permite valores True, False o null
 
-    def __str__(self):
-        return f"{self.user.username} - {self.series.title} - Liked: {self.liked}"

@@ -22,4 +22,6 @@ urlpatterns = [
     path('series/<int:series_id>/', views.series_detail, name='series_detail'),
     path('movie/<int:movie_id>/like/', views.like_movie, name='like_movie'),
     path('movie/<int:movie_id>/dislike/', views.dislike_movie, name='dislike_movie'),
+    path('series/<int:series_id>/like/', views.like_series, name='like_series'),
+    path('series/<int:series_id>/dislike/', views.dislike_series, name='dislike_series'),
 ]

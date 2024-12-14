@@ -147,3 +147,21 @@ def dislike_movie(request, movie_id):
         viewed_movie.liked = False
         viewed_movie.save()
     return redirect('viewed_list')
+
+
+@login_required
+def like_series(request, series_id):
+    viewed_series = ViewedSeries.objects.filter(user=request.user, series_id=series_id).first()
+    if viewed_series:
+        viewed_series.liked = True
+        viewed_series.save()
+    return redirect('viewed_list')
+
+
+@login_required
+def dislike_series(request, series_id):
+    viewed_series = ViewedSeries.objects.filter(user=request.user, series_id=series_id).first()
+    if viewed_series:
+        viewed_series.liked = False
+        viewed_series.save()
+    return redirect('viewed_list')

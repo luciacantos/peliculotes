@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Mi Proyecto{% endblock %}</title>
+    <title>{% block title %}Peliculinchis{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
@@ -11,40 +11,41 @@
     <header>
         <nav>
             <ul class="nav-container">
-                <!-- Nombre de usuario a la izquierda -->
+                <!-- Usuario a la izquierda -->
                 <li class="user">
                     {% if user.is_authenticated %}
-                        <span style="color: white;">{{ user.username }}</span>
+                        <span>{{ user.username }}</span>
                     {% else %}
-                        &nbsp; <!-- Espacio invisible -->
+                        &nbsp;
                     {% endif %}
                 </li>
 
-                <!-- Nombre de la página centrado -->
+                <!-- Logo centrado -->
                 <li class="logo">
                     <a href="{% url 'home' %}" class="logo-link">PELICULINCHIS</a>
                 </li>
 
-                <!-- Enlaces principales alineados a la derecha -->
+                <!-- Enlaces alineados a la derecha -->
                 <div class="nav-links">
-                    <li><a href="{% url 'movies' %}">Películas</a></li>
-                    <li><a href="{% url 'series' %}">Series</a></li>
+                    <li><a href="{% url 'movies' %}" class="{% if request.resolver_match.url_name == 'movies' %}active{% endif %}">Películas</a></li>
+                    <li><a href="{% url 'series' %}" class="{% if request.resolver_match.url_name == 'series' %}active{% endif %}">Series</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'my_list' %}">Mi Lista</a></li>
-                        <li><a href="{% url 'viewed_list' %}">Vistas</a></li>
+                        <li><a href="{% url 'my_list' %}" class="{% if request.resolver_match.url_name == 'my_list' %}active{% endif %}">Mi Lista</a></li>
+                        <li><a href="{% url 'viewed_list' %}" class="{% if request.resolver_match.url_name == 'viewed_list' %}active{% endif %}">Vistas</a></li>
                         <li>
                             <form method="post" action="{% url 'logout' %}">
                                 {% csrf_token %}
-                                <button type="submit">Cerrar sesión</button>
+                                <button type="submit" class="{% if request.resolver_match.url_name == 'logout' %}active{% endif %}">Cerrar sesión</button>
                             </form>
                         </li>
                     {% else %}
-                        <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                        <li><a href="{% url 'login' %}" class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}">Iniciar sesión</a></li>
                     {% endif %}
                 </div>
             </ul>
         </nav>
     </header>
+
     <main>
         {% block content %}
         {% endblock %}
