@@ -1,17 +1,23 @@
 {% extends 'movies/base.html' %}
 
-{% block title %}Películas Populares{% endblock %}
+{% block title %}Películas{% endblock %}
 
 {% block content %}
-    <h1 style="text-align: center; color: pink;">Películas Populares</h1>
-    <div class="movie-grid">
-        {% for movie in movies %}
-            <div class="movie-item">
-                <a href="{% url 'movie_detail' movie.id %}">
-                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
-                </a>
-                <h3 style="color: white;">{{ movie.title }}</h3>
+    <h1 style="text-align: center; color: pink;">Películas por Categorías</h1>
+
+    {% for category, movies_in_category in movies_by_category.items %}
+        <div style="margin-top: 30px;">
+            <h2 style="text-align: left; color: pink; text-transform: uppercase; border-bottom: 2px solid pink; padding-bottom: 5px;">{{ category }}</h2>
+            <div class="movie-grid">
+                {% for movie in movies_in_category %}
+                    <div class="movie-item">
+                        <a href="{% url 'movie_detail' movie.id %}">
+                            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                        </a>
+                        <h3 style="color: white;">{{ movie.title }}</h3>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
+        </div>
+    {% endfor %}
 {% endblock %}

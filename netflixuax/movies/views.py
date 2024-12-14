@@ -12,9 +12,18 @@ def home_view(request):
     return render(request, 'movies/home.html')
 
 def movies_view(request):
-    movies = Movie.objects.all()
-    return render(request, 'movies/movies.html', {'movies': movies})
 
+    categories = Movie.objects.values_list('category', flat=True).distinct()
+    movies_by_category = {category: Movie.objects.filter(category=category) for category in categories}
+
+    return render(request, 'movies/movies.html', {'movies_by_category': movies_by_category})
+
+def series_view(request):
+
+    categories = Series.objects.values_list('category', flat=True).distinct()
+    series_by_category = {category: Series.objects.filter(category=category) for category in categories}
+
+    return render(request, 'movies/series.html', {'series_by_category': series_by_category})
 
 def register(request):
     if request.method == 'POST':
@@ -36,11 +45,6 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'movies/login.html', {'form': form})
-
-
-def series_view(request):
-    series = Series.objects.all()
-    return render(request, 'movies/series.html', {'series': series})
 
 def movie_detail(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
