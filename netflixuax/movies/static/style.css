@@ -1,7 +1,7 @@
 /* Fondo de la página */
 body {
     background-color: black; /* Fondo negro */
-    color: black; /* Texto predeterminado en negro */
+    color: white; /* Texto predeterminado en blanco */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -12,63 +12,93 @@ header {
     background-color: pink; /* Fondo rosa */
     padding: 15px 20px; /* Espaciado alrededor de la cabecera */
     border-bottom: 2px solid #e41cb8; /* Línea inferior */
+    display: flex;
+    align-items: center; /* Alineación vertical de todos los elementos */
+    justify-content: space-between; /* Espacio entre el usuario, logo y enlaces */
+    position: relative; /* Para centrado absoluto del logo */
 }
 
+/* Usuario a la izquierda */
 header nav ul.nav-container {
-    list-style: none;
     display: flex;
-    align-items: center; /* Centra verticalmente los elementos */
-    justify-content: space-between; /* Usuario a la izquierda, enlaces a la derecha */
+    align-items: center;
+    list-style: none;
     padding: 0;
     margin: 0;
+    width: 100%;
 }
 
+/* Nombre del usuario */
 header nav ul li.user {
-    margin-right: auto; /* Empuja los enlaces hacia la derecha */
     font-size: 18px;
     font-family: 'Arial', sans-serif;
-    color: black; /* Nombre de usuario en negro */
+    color: white; /* Nombre de usuario en blanco */
     text-transform: uppercase;
     font-weight: bold;
+    margin-right: auto; /* Empuja el logo hacia el centro */
 }
 
-/* Enlaces y botones de la cabecera */
+/* Logo centrado */
+header nav ul li.logo {
+    position: absolute; /* Posición absoluta para centrado */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+header nav ul li.logo .logo-link {
+    text-decoration: none;
+    color: #e41cb8; /* Rosa fuerte */
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+header nav ul li.logo .logo-link:hover {
+    color: #ff69b4; /* Cambia a rosa más claro al pasar el cursor */
+}
+
+/* Enlaces principales alineados a la derecha */
 header nav ul div.nav-links {
     display: flex;
     align-items: center; /* Centra verticalmente los enlaces */
+    justify-content: flex-end; /* Alinea los enlaces a la derecha */
     gap: 20px; /* Espaciado uniforme entre enlaces */
+    margin-left: auto;
 }
 
-header nav ul div.nav-links li a, 
-header nav ul div.nav-links li button {
+header nav ul div.nav-links li {
+    list-style: none;
+}
+
+header nav ul div.nav-links li a {
     text-decoration: none;
     color: black; /* Enlaces en negro */
     font-size: 18px;
     font-family: 'Arial', sans-serif;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 5px 10px; /* Reduce el padding para mejor alineación */
+    padding: 5px 10px;
     transition: all 0.3s ease;
 }
 
-header nav ul div.nav-links li a:hover, 
-header nav ul div.nav-links li button:hover {
+header nav ul div.nav-links li a:hover {
     background-color: #ff69b4; /* Fondo al pasar el cursor */
-    color: black; /* Texto negro al pasar el cursor */
+    color: white; /* Texto blanco al pasar el cursor */
     border-radius: 5px;
     cursor: pointer;
 }
 
 /* Botón para cerrar sesión */
 header nav ul li form {
-    margin: 0; /* Elimina márgenes adicionales */
-    display: inline-block; /* Asegura que esté en línea */
+    margin: 0;
+    display: inline-block;
 }
 
 header nav ul li form button {
     background: none;
     border: none;
-    color: black; /* Botón en negro */
+    color: white; /* Botón en blanco */
     font-size: 18px;
     font-family: 'Arial', sans-serif;
     text-transform: uppercase;
@@ -79,7 +109,7 @@ header nav ul li form button {
 
 header nav ul li form button:hover {
     background-color: #ff69b4;
-    color: black;
+    color: black; /* Texto en negro al pasar el cursor */
     border-radius: 5px;
 }
 
@@ -89,9 +119,42 @@ header nav ul li {
     vertical-align: middle;
 }
 
-/* Títulos y texto general */
-h1, h2, h3, h4, h5, h6, p, a, span {
-    color: black; /* Todo el texto en negro */
+
+
+/* Grid de películas y series */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajusta automáticamente las columnas */
+    gap: 20px; /* Espaciado entre elementos */
+    padding: 20px;
+    justify-content: center; /* Centra los elementos en el contenedor */
+}
+
+/* Estilo de cada película/serie */
+.movie-item {
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+.movie-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+.movie-item h3 {
+    margin-top: 10px;
+    font-size: 16px;
+    color: white;
 }
 
 /* Detalle de película */
@@ -99,25 +162,66 @@ h1, h2, h3, h4, h5, h6, p, a, span {
     text-align: center;
     margin: 20px auto;
     max-width: 800px;
-    color: black;
+    color: white;
+}
+
+.movie-detail img {
+    width: 300px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.movie-detail-info {
+    background-color: #333;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: left;
+    color: white;
 }
 
 .movie-detail-info p {
     font-size: 16px;
     line-height: 1.5;
-    color: black; /* Asegura que los párrafos del detalle también sean negros */
 }
 
 /* Botones */
 .add-btn, .remove-btn, .view-btn {
-    color: black; /* Texto de botones en negro */
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
 }
 
-/* Estilo para el logo PELICULINCHIS */
-.logo-link {
-    color: black; /* Texto del logo en negro */
+.add-btn {
+    background-color: pink;
 }
 
-.logo-link:hover {
-    color: black; /* Mantiene el color negro al pasar el cursor */
+.remove-btn {
+    background-color: red;
+}
+
+.view-btn {
+    background-color: green;
+}
+
+.add-btn:hover {
+    background-color: #ff69b4;
+}
+
+.remove-btn:hover {
+    background-color: darkred;
+}
+
+.view-btn:hover {
+    background-color: darkgreen;
+}
+
+/* General */
+h1, h2, h3, h4, h5, h6, p, a, span {
+    color: white; /* Asegura que todo el texto sea visible */
 }

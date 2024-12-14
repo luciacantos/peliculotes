@@ -11,12 +11,12 @@
     <header>
         <nav>
             <ul class="nav-container">
-                <!-- Nombre de usuario o marcador a la izquierda -->
+                <!-- Nombre de usuario a la izquierda -->
                 <li class="user">
                     {% if user.is_authenticated %}
-                        {{ user.username }}
+                        <span style="color: white;">{{ user.username }}</span>
                     {% else %}
-                        &nbsp; <!-- Espacio invisible para mantener la estructura -->
+                        &nbsp; <!-- Espacio invisible -->
                     {% endif %}
                 </li>
 
@@ -45,10 +45,14 @@
             </ul>
         </nav>
     </header>
-
     <main>
-        {% block content %}{% endblock %}
+        {% block content %}
+        {% endblock %}
     </main>
+    <footer>
+        <p style="text-align: center; color: gray; font-size: 14px; margin-top: 20px;">
+            &copy; 2024 Peliculinchis. Todos los derechos reservados.
+        </p>
+    </footer>
 </body>
 </html>
-

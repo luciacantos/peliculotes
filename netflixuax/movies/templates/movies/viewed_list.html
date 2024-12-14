@@ -18,7 +18,7 @@
             {% else %}
                 <a href="{% url 'like_movie' movie.movie.id %}" style="color: green; text-decoration: none;">👍</a>
                 |
-                <a href="{% url 'dislike_movie' movie.movie.id %}" style="color: red; text-decoration: none;">👎/a>
+                <a href="{% url 'dislike_movie' movie.movie.id %}" style="color: red; text-decoration: none;">👎</a>
             {% endif %}
         </li>
         {% endfor %}
