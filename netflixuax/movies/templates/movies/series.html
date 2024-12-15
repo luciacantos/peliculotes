@@ -3,22 +3,17 @@
 {% block title %}Series{% endblock %}
 
 {% block content %}
-    <h1 style="text-align: center; color: pink;">Series por Categorías</h1>
-
-    {% for category, series_in_category in series_by_category.items %}
-        <div style="margin-top: 30px;">
-            <h2 style="text-align: left; color: pink; text-transform: uppercase; border-bottom: 2px solid pink; padding-bottom: 5px;">{{ category }}</h2>
-            <div class="movie-grid">
-                {% for series in series_in_category %}
-                    <div class="movie-item">
-                        <a href="{% url 'series_detail' series.id %}">
-                            <img src="https://image.tmdb.org/t/p/w500{{ series.poster_path }}" alt="{{ series.title }}">
-                        </a>
-                        <h3 style="color: white;">{{ series.title }}</h3>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
+<h1 style="text-align: center; color: pink;">Series</h1>
+<div class="movie-grid">
+    {% for serie in series %}
+    <div class="movie-item">
+        <a href="{% url 'series_detail' serie.id %}">
+            <img src="https://image.tmdb.org/t/p/w500{{ serie.poster_path }}" alt="{{ serie.title }}">
+            <h3>{{ serie.title }}</h3>
+        </a>
+    </div>
+    {% empty %}
+    <p style="text-align: center; color: white;">No se encontraron series.</p>
     {% endfor %}
+</div>
 {% endblock %}
-

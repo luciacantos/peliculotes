@@ -12,19 +12,14 @@
     <header>
         <nav>
             <ul class="nav-container">
-                <!-- Usuario a la izquierda -->
                 <li class="user">
                     {% if user.is_authenticated %}
                         <a href="{% url 'user_settings' %}" class="user-link">{{ user.username }}</a>
                     {% endif %}
                 </li>
-    
-                <!-- Logo centrado -->
                 <li class="logo">
                     <a href="{% url 'home' %}" class="logo-link">PELICULINCHIS</a>
                 </li>
-    
-                <!-- Enlaces alineados a la derecha -->
                 <li class="nav-links">
                     <a href="{% url 'movies' %}" class="{% if request.resolver_match.url_name == 'movies' %}active{% endif %}">Películas</a>
                     <a href="{% url 'series' %}" class="{% if request.resolver_match.url_name == 'series' %}active{% endif %}">Series</a>
@@ -41,7 +36,18 @@
                 </li>
             </ul>
         </nav>
+    
+        <!-- Buscador Condicional -->
+        {% if show_search %}
+        <div style="text-align: center; margin-top: 20px;">
+            <form method="GET" style="display: inline-block;" action="">
+                <input type="text" name="search" placeholder="Buscar {{ search_type }}" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; width: 300px;">
+                <button type="submit" style="background-color: pink; color: black; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Buscar</button>
+            </form>
+        </div>
+        {% endif %}
     </header>
+    
     
     
 

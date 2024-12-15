@@ -7,13 +7,13 @@
 
 <!-- Películas vistas -->
 <h2 style="color: pink; text-align: center; margin-top: 20px;">Películas</h2>
-<div class="viewed-grid">
+<div class="movie-grid">
     {% for movie in viewed_movies %}
-    <div class="viewed-item">
-        <h3>{{ movie.movie.title }}</h3>
+    <div class="movie-item">
         <img src="https://image.tmdb.org/t/p/w500{{ movie.movie.poster_path }}" alt="{{ movie.movie.title }}">
+        <h3>{{ movie.movie.title }}</h3>
         {% if movie.liked == True %}
-            <p style="color: green;">Está guapa!.</p>
+            <p style="color: green;">¡Está guapa!</p>
         {% elif movie.liked == False %}
             <p style="color: red;">Vaya puta mierda</p>
         {% else %}
@@ -30,13 +30,13 @@
 
 <!-- Series vistas -->
 <h2 style="color: pink; text-align: center; margin-top: 40px;">Series</h2>
-<div class="viewed-grid">
+<div class="movie-grid">
     {% for series in viewed_series %}
-    <div class="viewed-item">
-        <h3>{{ series.series.title }}</h3>
+    <div class="movie-item">
         <img src="https://image.tmdb.org/t/p/w500{{ series.series.poster_path }}" alt="{{ series.series.title }}">
+        <h3>{{ series.series.title }}</h3>
         {% if series.liked == True %}
-            <p style="color: green;">Está guapa!.</p>
+            <p style="color: green;">¡Está guapa!</p>
         {% elif series.liked == False %}
             <p style="color: red;">Vaya puta mierda</p>
         {% else %}
@@ -51,3 +51,4 @@
     {% endfor %}
 </div>
 {% endblock %}
+

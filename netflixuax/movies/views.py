@@ -12,18 +12,33 @@ def home_view(request):
     return render(request, 'movies/home.html')
 
 def movies_view(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        movies = Movie.objects.filter(Q(title__icontains=search_query))
+    else:
+        movies = Movie.objects.all()
 
-    categories = Movie.objects.values_list('category', flat=True).distinct()
-    movies_by_category = {category: Movie.objects.filter(category=category) for category in categories}
-
-    return render(request, 'movies/movies.html', {'movies_by_category': movies_by_category})
+    context = {
+        'movies': movies,
+        'show_search': True,
+        'search_type': 'películas',
+    }
+    return render(request, 'movies/movies.html', context)
 
 def series_view(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        series = Series.objects.filter(Q(title__icontains=search_query))
+    else:
+        series = Series.objects.all()
 
-    categories = Series.objects.values_list('category', flat=True).distinct()
-    series_by_category = {category: Series.objects.filter(category=category) for category in categories}
+    context = {
+        'series': series,
+        'show_search': True,
+        'search_type': 'series',
+    }
+    return render(request, 'movies/series.html', context)
 
-    return render(request, 'movies/series.html', {'series_by_category': series_by_category})
 
 def register(request):
     if request.method == 'POST':

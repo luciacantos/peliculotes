@@ -3,20 +3,30 @@
 {% block title %}{{ movie.title }}{% endblock %}
 
 {% block content %}
-<div class="movie-detail">
-    <h1>{{ movie.title }}</h1>
-    <div class="movie-detail-content">
-        <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
-        <div class="movie-detail-info">
-            <p><strong>Resumen:</strong> {{ movie.overview }}</p>
-            <p><strong>Fecha de estreno:</strong> {{ movie.release_date }}</p>
+<div class="movie-detail" style="max-width: 900px; margin: 0 auto; color: white; text-align: center;">
+    <!-- Título de la película -->
+    <h1 style="color: pink; font-size: 2.5rem; margin-bottom: 20px;">{{ movie.title }}</h1>
+    
+    <!-- Contenedor del contenido -->
+    <div class="movie-detail-content" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; background: #222; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <!-- Imagen del póster -->
+        <div>
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" style="max-width: 300px; border-radius: 10px;">
         </div>
-        {% if user.is_authenticated %}
-        <a href="{% url 'add_movie' movie.id %}" class="add-btn">Añadir a Mi Lista</a>
-        <a href="{% url 'mark_as_viewed_movie' movie.id %}" class="view-btn">Vista</a>
-
-
-        {% endif %}
+        
+        <!-- Información de la película -->
+        <div style="text-align: left; max-width: 500px;">
+            <p><strong style="color: pink;">Resumen:</strong> {{ movie.overview }}</p>
+            <p><strong style="color: pink;">Fecha de estreno:</strong> {{ movie.release_date }}</p>
+        </div>
     </div>
+
+    <!-- Botones de interacción -->
+    {% if user.is_authenticated %}
+    <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px;">
+        <a href="{% url 'add_movie' movie.id %}" style="background-color: pink; color: black; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Añadir a Mi Lista</a>
+        <a href="{% url 'mark_as_viewed_movie' movie.id %}" style="background-color: green; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Vista</a>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

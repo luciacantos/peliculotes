@@ -3,20 +3,31 @@
 {% block title %}{{ series.title }}{% endblock %}
 
 {% block content %}
-<div class="movie-detail">
-    <h1>{{ series.title }}</h1>
-    <div class="movie-detail-content">
-        <img src="https://image.tmdb.org/t/p/w500{{ series.poster_path }}" alt="{{ series.title }}">
-        <div class="movie-detail-info">
-            <p><strong>Resumen:</strong> {{ series.overview }}</p>
-            <p><strong>Fecha de lanzamiento:</strong> {{ series.release_date }}</p>
+<div class="movie-detail" style="max-width: 900px; margin: 0 auto; color: white; text-align: center;">
+    <!-- Título de la serie -->
+    <h1 style="color: pink; font-size: 2.5rem; margin-bottom: 20px;">{{ series.title }}</h1>
+    
+    <!-- Contenedor del contenido -->
+    <div class="movie-detail-content" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; background: #222; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <!-- Imagen del póster -->
+        <div>
+            <img src="https://image.tmdb.org/t/p/w500{{ series.poster_path }}" alt="{{ series.title }}" style="max-width: 300px; border-radius: 10px;">
         </div>
-        {% if user.is_authenticated %}
-        <div class="buttons">
-            <a href="{% url 'add_series' series.id %}" class="add-btn">Añadir a Mi Lista</a>
-            <a href="{% url 'mark_as_viewed_series' series.id %}" class="view-btn">Vista</a>
+        
+        <!-- Información de la serie -->
+        <div style="text-align: left; max-width: 500px;">
+            <p><strong style="color: pink;">Resumen:</strong> {{ series.overview }}</p>
+            <p><strong style="color: pink;">Fecha de lanzamiento:</strong> {{ series.release_date }}</p>
         </div>
-        {% endif %}
     </div>
+
+    <!-- Botones de interacción -->
+    {% if user.is_authenticated %}
+    <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px;">
+        <a href="{% url 'add_series' series.id %}" style="background-color: pink; color: black; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Añadir a Mi Lista</a>
+        <a href="{% url 'mark_as_viewed_series' series.id %}" style="background-color: green; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Vista</a>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}
+
