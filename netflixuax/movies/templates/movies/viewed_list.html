@@ -12,7 +12,6 @@
     <div class="viewed-item">
         <h3>{{ movie.movie.title }}</h3>
         <img src="https://image.tmdb.org/t/p/w500{{ movie.movie.poster_path }}" alt="{{ movie.movie.title }}">
-        <p>{{ movie.movie.overview }}</p>
         {% if movie.liked == True %}
             <p style="color: green;">Está guapa!.</p>
         {% elif movie.liked == False %}
@@ -36,7 +35,6 @@
     <div class="viewed-item">
         <h3>{{ series.series.title }}</h3>
         <img src="https://image.tmdb.org/t/p/w500{{ series.series.poster_path }}" alt="{{ series.series.title }}">
-        <p>{{ series.series.overview }}</p>
         {% if series.liked == True %}
             <p style="color: green;">Está guapa!.</p>
         {% elif series.liked == False %}

@@ -2,7 +2,7 @@
 body {
     background-color: black; /* Fondo negro */
     color: white; /* Texto predeterminado en blanco */
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Cambiada a Roboto */
     margin: 0;
     padding: 0;
 }
@@ -10,31 +10,29 @@ body {
 /* Cabecera */
 header {
     background-color: pink; /* Fondo rosa */
-    padding: 10px 20px;
-    border-bottom: 2px solid #e41cb8; /* Línea inferior */
+    padding: 15px 30px; /* Aumentar espacio alrededor */
+    border-bottom: 3px solid #e41cb8; /* Línea inferior más marcada */
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-family: 'Roboto', sans-serif; /* Fuente moderna */
 }
 
-/* Contenedor de la cabecera */
+/* Contenedor de navegación */
 .nav-container {
     display: flex;
     align-items: center;
     width: 100%;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    justify-content: space-between; /* Distribuye espacio entre los elementos */
 }
 
-/* Usuario a la izquierda */
+/* Usuario alineado a la izquierda */
 .user {
     font-size: 18px;
-    font-family: 'Arial', sans-serif;
     color: white; /* Nombre de usuario en blanco */
     text-transform: uppercase;
     font-weight: bold;
-    margin-right: auto;
+    margin-right: 20px; /* Espacio entre usuario y logo */
 }
 
 /* Logo centrado */
@@ -59,59 +57,38 @@ header {
 /* Enlaces alineados a la derecha */
 .nav-links {
     display: flex;
-    gap: 20px;
+    gap: 25px; /* Espaciado entre enlaces */
 }
 
-.nav-links li {
-    list-style: none;
-}
-
-.nav-links a {
+.nav-links a, .nav-links form button {
     text-decoration: none;
     color: black;
     font-size: 18px;
-    font-family: 'Arial', sans-serif;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 5px 10px;
+    padding: 10px 15px; /* Aumentar área de clic */
+    border-radius: 5px; /* Esquinas redondeadas */
     transition: all 0.3s ease;
 }
 
 /* Página activa */
-.nav-links a.active, 
-.nav-links form button.active {
+.nav-links a.active, .nav-links form button.active {
     background-color: #ff69b4; /* Fondo rosa claro */
     color: white; /* Texto blanco */
-    border-radius: 5px;
 }
 
 /* Hover en los enlaces */
-.nav-links a:hover {
+.nav-links a:hover, .nav-links form button:hover {
     background-color: #ff69b4; /* Fondo al pasar el cursor */
     color: white; /* Texto blanco */
-    border-radius: 5px;
 }
 
 /* Botón de cerrar sesión */
 .nav-links form button {
     background: none;
     border: none;
-    color: black;
-    font-size: 18px;
-    font-family: 'Arial', sans-serif;
-    text-transform: uppercase;
-    font-weight: bold;
     cursor: pointer;
-    padding: 5px 10px;
-    transition: all 0.3s ease;
 }
-
-.nav-links form button:hover {
-    background-color: #ff69b4;
-    color: white; /* Texto en blanco al pasar el cursor */
-    border-radius: 5px;
-}
-
 
 
 /* Grid de películas y series */
@@ -219,7 +196,6 @@ h1, h2, h3, h4, h5, h6, p, a, span {
     color: white; /* Asegura que todo el texto sea visible */
 }
 
-
 /* Estilo del contenedor del carrusel */
 .slideshow-container {
     position: relative;
@@ -238,13 +214,12 @@ h1, h2, h3, h4, h5, h6, p, a, span {
 .slide .text {
     color: pink;
     font-size: 20px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
     position: absolute;
     bottom: 8px;
     left: 16px;
     text-shadow: 2px 2px 4px black;
 }
-
 
 /* Contenedor para el contenido visto */
 .viewed-grid {
@@ -302,3 +277,4 @@ h1, h2, h3, h4, h5, h6, p, a, span {
 .rating-buttons a:hover {
     opacity: 0.8;
 }
+
