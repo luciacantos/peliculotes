@@ -12,6 +12,7 @@
             Nos alegra tenerte aquí. Explora tus películas y series favoritas.
         </p>
 
+        <!-- Sugerencias Personalizadas -->
         <h2 style="margin-top: 40px; color: pink; font-size: 30px; text-shadow: 2px 2px 5px black;">
             Sugerencias para ti
         </h2>
@@ -50,10 +51,34 @@
             Por favor, <a href="{% url 'login' %}" style="color: pink; text-decoration: none;">inicia sesión</a> o 
             <a href="{% url 'register' %}" style="color: pink; text-decoration: none;">regístrate</a> para disfrutar de la experiencia completa.
         </p>
+
+        <!-- Fila de películas aleatorias en movimiento -->
+        <div class="scrolling-row" style="overflow: hidden; white-space: nowrap; margin-top: 30px;">
+            <div class="movie-ticker" style="display: inline-block; animation: scroll 20s linear infinite;">
+                {% for movie in random_movies %}
+                    <div style="display: inline-block; margin-right: 20px; text-align: center;">
+                        <a href="{% url 'movie_detail' movie.id %}">
+                            <img src="https://image.tmdb.org/t/p/w200{{ movie.poster_path }}" alt="{{ movie.title }}" style="border-radius: 8px; width: 150px; height: auto;">
+                        </a>
+                        <p style="color: white; margin-top: 5px; font-size: 14px;">{{ movie.title }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <style>
+            @keyframes scroll {
+                from {
+                    transform: translateX(100%);
+                }
+                to {
+                    transform: translateX(-100%);
+                }
+            }
+        </style>
     {% endif %}
 </div>
 {% endblock %}
-
 
 
 

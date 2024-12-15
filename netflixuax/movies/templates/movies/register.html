@@ -3,23 +3,32 @@
 {% block title %}Regístrate{% endblock %}
 
 {% block content %}
-<div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid pink; border-radius: 8px; background: black; color: white;">
-    <h2 style="text-align: center; color: pink;">Regístrate</h2>
-    <form method="post">
+<h1 class="settings-title">Regístrate</h1>
+
+<div class="settings-container">
+    <form method="post" class="settings-form">
         {% csrf_token %}
-        <div style="margin-bottom: 15px;">
-            <label style="color: white;">{{ form.username.label_tag }}</label>
+        <div class="form-group">
+            {{ form.username.label_tag }}
             {{ form.username }}
         </div>
-        <div style="margin-bottom: 15px;">
-            <label style="color: white;">{{ form.password1.label_tag }}</label>
+        <div class="form-group">
+            {{ form.password1.label_tag }}
             {{ form.password1 }}
         </div>
-        <div style="margin-bottom: 15px;">
-            <label style="color: white;">{{ form.password2.label_tag }}</label>
+        <div class="form-group">
+            {{ form.password2.label_tag }}
             {{ form.password2 }}
         </div>
-        <button type="submit" style="width: 100%; padding: 10px; background: pink; color: black; border: none; border-radius: 4px; font-size: 16px;">Crear cuenta</button>
+        <button type="submit" class="btn-settings">Crear Cuenta</button>
     </form>
+
+    <hr class="divider">
+
+    <!-- Pregunta y botón de inicio de sesión -->
+    <p style="text-align: center; color: white; margin-top: 15px;">¿Ya tienes una cuenta?</p>
+    <div style="text-align: center; margin-top: 10px;">
+        <a href="{% url 'login' %}" class="btn-settings" style="display: inline-block; width: auto; padding: 10px 20px; text-transform: uppercase;">Iniciar Sesión</a>
+    </div>
 </div>
 {% endblock %}
