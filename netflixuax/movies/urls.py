@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import register, home_view, my_list, add_movie, remove_favorite, series_view, movies_view, remove_favorite_series, add_series, mark_as_viewed_movie, mark_as_viewed_series, viewed_list, movie_detail
+from .views import register, home_view, my_list, add_movie, remove_favorite, series_view, movies_view, remove_favorite_series, add_series, mark_as_viewed_movie, mark_as_viewed_series, viewed_list, movie_detail, user_settings
 from django.contrib.auth import views as auth_views
 from . import views
 
@@ -11,6 +11,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='movies/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('my_list/', views.my_list, name='my_list'),
+    path('settings/', views.user_settings, name='user_settings'),
     path('add_movie/<int:movie_id>/', views.add_movie, name='add_movie'),
     path('remove_favorite/<int:movie_id>/', views.remove_favorite, name='remove_favorite'),
     path('add_series/<int:series_id>/', views.add_series, name='add_series'),
@@ -24,4 +25,5 @@ urlpatterns = [
     path('movie/<int:movie_id>/dislike/', views.dislike_movie, name='dislike_movie'),
     path('series/<int:series_id>/like/', views.like_series, name='like_series'),
     path('series/<int:series_id>/dislike/', views.dislike_series, name='dislike_series'),
+    path('user/favorites/', views.user_favorites, name='user_favorites'),
 ]

@@ -1,6 +1,31 @@
-<h1>Mis películas favoritas</h1>
-<ul>
-    {% for favorite in favorites %}
-        <li>{{ favorite.movie.title }}</li>
+{% extends 'movies/base.html' %}
+
+{% block title %}Favoritos{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center; color: pink;">Tus Favoritos</h1>
+
+<h2 style="text-align: center; color: pink;">Películas Favoritas</h2>
+<div class="movie-grid">
+    {% for movie in favorite_movies %}
+    <div class="movie-item">
+        <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+        <h3>{{ movie.title }}</h3>
+    </div>
+    {% empty %}
+    <p style="text-align: center; color: white;">No tienes películas marcadas como favoritas.</p>
     {% endfor %}
-</ul>
+</div>
+
+<h2 style="text-align: center; color: pink; margin-top: 40px;">Series Favoritas</h2>
+<div class="movie-grid">
+    {% for series in favorite_series %}
+    <div class="movie-item">
+        <img src="https://image.tmdb.org/t/p/w500{{ series.poster_path }}" alt="{{ series.title }}">
+        <h3>{{ series.title }}</h3>
+    </div>
+    {% empty %}
+    <p style="text-align: center; color: white;">No tienes series marcadas como favoritas.</p>
+    {% endfor %}
+</div>
+{% endblock %}

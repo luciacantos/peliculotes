@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Movie, FavouriteMovie, Series, FavouriteSeries, ViewedMovie, ViewedSeries
+from .models import Movie, FavouriteMovie, Series, FavouriteSeries, ViewedMovie, ViewedSeries, UserProfile
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, logout
-from .forms import CustomUserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth import login, logout, update_session_auth_hash
+from .forms import CustomUserCreationForm, UpdateUsernameForm, UserGenresForm
 from django.db.models import Q
 
 
@@ -64,6 +64,58 @@ def home_view(request):
     else:
         suggestions = Movie.objects.all()[:10]  # Mostrar cualquier película para usuarios no autenticados
     return render(request, 'movies/home.html', {'suggestions': suggestions})
+
+
+@login_required
+def user_settings(request):
+    user = request.user
+
+    # Asegurarse de que el perfil exista
+    if not hasattr(user, 'profile'):
+        UserProfile.objects.create(user=user)
+
+    username_form = UpdateUsernameForm(instance=user)
+    password_form = PasswordChangeForm(user)
+    genres_form = UserGenresForm(instance=user.profile)
+
+    if request.method == 'POST':
+        if 'update_username' in request.POST:
+            username_form = UpdateUsernameForm(request.POST, instance=user)
+            if username_form.is_valid():
+                username_form.save()
+                return redirect('user_settings')
+        elif 'update_password' in request.POST:
+            password_form = PasswordChangeForm(user, request.POST)
+            if password_form.is_valid():
+                user = password_form.save()
+                update_session_auth_hash(request, user)
+                return redirect('user_settings')
+        elif 'update_genres' in request.POST:
+            genres_form = UserGenresForm(request.POST, instance=user.profile)
+            if genres_form.is_valid():
+                genres_form.save()
+                return redirect('user_settings')
+
+    context = {
+        'username_form': username_form,
+        'password_form': password_form,
+        'genres_form': genres_form,
+    }
+    return render(request, 'movies/settings.html', context)
+
+
+@login_required
+def user_favorites(request):
+    user = request.user
+    favorite_movies = Movie.objects.filter(liked_by=user)
+    favorite_series = Series.objects.filter(liked_by=user)
+
+    context = {
+        'favorite_movies': favorite_movies,
+        'favorite_series': favorite_series,
+    }
+    return render(request, 'movies/favorites.html', context)
+
 
 @login_required
 def logout_view(request):

@@ -15,7 +15,7 @@
                 <!-- Usuario a la izquierda -->
                 <li class="user">
                     {% if user.is_authenticated %}
-                        <span>{{ user.username }}</span>
+                        <a href="{% url 'user_settings' %}" class="user-link">{{ user.username }}</a>
                     {% endif %}
                 </li>
     
@@ -42,6 +42,7 @@
             </ul>
         </nav>
     </header>
+    
     
 
     <main>

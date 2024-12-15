@@ -91,6 +91,25 @@ header {
 }
 
 
+/* Enlace del usuario */
+.user-link {
+    text-decoration: none;
+    color: white; /* Blanco para resaltar */
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 5px 10px; /* Espaciado interno */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    transition: all 0.3s ease;
+}
+
+.user-link:hover {
+    border: 2px solid white; /* Borde blanco al pasar el cursor */
+    border-radius: 5px; /* Esquinas redondeadas */
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
+}
+
+
 /* Grid de películas y series */
 .movie-grid {
     display: grid;
@@ -278,3 +297,43 @@ h1, h2, h3, h4, h5, h6, p, a, span {
     opacity: 0.8;
 }
 
+/* Estilo de los formularios */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form label {
+    font-size: 14px;
+    color: #ccc;
+}
+
+form input {
+    padding: 10px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+form input:focus {
+    outline: none;
+    border-color: pink;
+    box-shadow: 0 0 5px pink;
+}
+
+form button {
+    transition: all 0.3s ease;
+}
+
+form button:hover {
+    background-color: #ff69b4;
+}
+
+/* Caja de configuración */
+div {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
