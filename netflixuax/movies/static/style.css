@@ -1,21 +1,21 @@
 /* Fondo de la página */
 body {
-    background-color: black; /* Fondo negro */
-    color: white; /* Texto predeterminado en blanco */
-    font-family: 'Roboto', sans-serif; /* Cambiada a Roboto */
+    background-color: black;
+    color: white;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
 }
 
 /* Cabecera */
 header {
-    background-color: pink; /* Fondo rosa */
-    padding: 15px 30px; /* Aumentar espacio alrededor */
-    border-bottom: 3px solid #e41cb8; /* Línea inferior más marcada */
+    background-color: pink;
+    padding: 15px 30px;
+    border-bottom: 3px solid #e41cb8;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-family: 'Roboto', sans-serif; /* Fuente moderna */
+    font-family: 'Roboto', sans-serif;
 }
 
 /* Contenedor de navegación */
@@ -23,16 +23,16 @@ header {
     display: flex;
     align-items: center;
     width: 100%;
-    justify-content: space-between; /* Distribuye espacio entre los elementos */
+    justify-content: space-between;
 }
 
 /* Usuario alineado a la izquierda */
 .user {
     font-size: 18px;
-    color: white; /* Nombre de usuario en blanco */
+    color: white;
     text-transform: uppercase;
     font-weight: bold;
-    margin-right: 20px; /* Espacio entre usuario y logo */
+    margin-right: 20px;
 }
 
 /* Logo centrado */
@@ -43,7 +43,7 @@ header {
 
 .logo .logo-link {
     text-decoration: none;
-    color: #e41cb8; /* Rosa fuerte */
+    color: #e41cb8;
     font-size: 24px;
     font-weight: bold;
     text-transform: uppercase;
@@ -51,13 +51,13 @@ header {
 }
 
 .logo .logo-link:hover {
-    color: #ff69b4; /* Cambia a rosa más claro al pasar el cursor */
+    color: #ff69b4;
 }
 
 /* Enlaces alineados a la derecha */
 .nav-links {
     display: flex;
-    gap: 25px; /* Espaciado entre enlaces */
+    gap: 25px;
 }
 
 .nav-links a, .nav-links form button {
@@ -66,21 +66,21 @@ header {
     font-size: 18px;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 10px 15px; /* Aumentar área de clic */
-    border-radius: 5px; /* Esquinas redondeadas */
+    padding: 10px 15px;
+    border-radius: 5px;
     transition: all 0.3s ease;
 }
 
 /* Página activa */
 .nav-links a.active, .nav-links form button.active {
-    background-color: #ff69b4; /* Fondo rosa claro */
-    color: white; /* Texto blanco */
+    background-color: #ff69b4;
+    color: white;
 }
 
 /* Hover en los enlaces */
 .nav-links a:hover, .nav-links form button:hover {
-    background-color: #ff69b4; /* Fondo al pasar el cursor */
-    color: white; /* Texto blanco */
+    background-color: #ff69b4;
+    color: white;
 }
 
 /* Botón de cerrar sesión */
@@ -93,28 +93,63 @@ header {
 /* Enlace del usuario */
 .user-link {
     text-decoration: none;
-    color: white; /* Blanco para resaltar */
+    color: white;
     font-size: 18px;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 5px 10px; /* Espaciado interno */
-    border: 2px solid transparent; /* Borde transparente por defecto */
+    padding: 5px 10px;
+    border: 2px solid transparent;
     transition: all 0.3s ease;
 }
 
 .user-link:hover {
-    border: 2px solid white; /* Borde blanco al pasar el cursor */
-    border-radius: 5px; /* Esquinas redondeadas */
-    background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Botones de géneros con espacio entre filas */
+.genre-buttons-container {
+    display: flex;
+    flex-wrap: wrap; /* Permitir varias filas */
+    gap: 20px; /* Espacio entre botones */
+    justify-content: flex-start; /* Alineación de los botones */
+    padding: 20px;
+    margin-bottom: 30px; /* Espacio con el contenido siguiente */
+}
+
+.genre-buttons-container a {
+    display: inline-block;
+    padding: 15px 25px; /* Tamaño más grande */
+    font-size: 22px; /* Letra más grande */
+    font-weight: bold;
+    background-color: pink;
+    color: black;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.genre-buttons-container a:hover {
+    background-color: #ff69b4;
+    color: white;
+}
+
+
+.genre-buttons-container a.active {
+    background-color: #ff69b4; /* Un color más destacado */
+    color: white; /* Texto en blanco */
+    font-weight: bold;
+    border: 2px solid white; /* Un borde para resaltarlo */
 }
 
 /* Grid de películas y series */
 .movie-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajusta automáticamente las columnas */
-    gap: 20px; /* Espaciado entre elementos */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
     padding: 20px;
-    justify-content: center; /* Centra los elementos en el contenedor */
+    justify-content: center;
 }
 
 /* Estilo de cada película/serie */
@@ -207,132 +242,3 @@ header {
 .view-btn:hover {
     background-color: darkgreen;
 }
-
-/* General */
-h1, h2, h3, h4, h5, h6, p, a, span {
-    color: white; /* Asegura que todo el texto sea visible */
-}
-
-/* Estilo del contenedor del carrusel */
-.slideshow-container {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-    overflow: hidden;
-}
-
-/* Estilo para cada imagen (slide) */
-.slide {
-    display: none;
-    position: relative;
-}
-
-/* Estilo para el texto en las imágenes */
-.slide .text {
-    color: pink;
-    font-size: 20px;
-    font-family: 'Roboto', sans-serif;
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
-    text-shadow: 2px 2px 4px black;
-}
-
-/* Contenedor para el contenido visto */
-.viewed-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajusta columnas según el espacio disponible */
-    gap: 20px;
-    padding: 20px;
-    justify-content: center;
-}
-
-/* Elementos individuales (películas o series) */
-.viewed-item {
-    background-color: #1a1a1a; /* Fondo oscuro para cada elemento */
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.viewed-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-.viewed-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
-}
-
-/* Botones de calificación */
-.rating-buttons {
-    margin-top: 10px;
-}
-
-.rating-buttons a {
-    margin: 0 10px;
-    text-decoration: none;
-    font-size: 20px;
-    padding: 5px 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.like-btn {
-    background-color: green;
-    color: white;
-}
-
-.dislike-btn {
-    background-color: red;
-    color: white;
-}
-
-.rating-buttons a:hover {
-    opacity: 0.8;
-}
-
-/* Estilo de los formularios */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-form label {
-    font-size: 14px;
-    color: #ccc;
-}
-
-form input {
-    padding: 10px;
-    border: 1px solid #444;
-    background-color: #333;
-    color: white;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-form input:focus {
-    outline: none;
-    border-color: pink;
-    box-shadow: 0 0 5px pink;
-}
-
-form button {
-    transition: all 0.3s ease;
-}
-
-form button:hover {
-    background-color: #ff69b4;
-}
-
-/* Caja de configuración */
-div {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-}
-
