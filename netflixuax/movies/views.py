@@ -8,9 +8,23 @@ from .forms import CustomUserCreationForm, UpdateUsernameForm, UserGenresForm, U
 from django.db.models import Q
 
 
-
 def home_view(request):
-    return render(request, 'movies/home.html')
+    if request.user.is_authenticated:
+        suggestions = Movie.objects.all()[:10]
+        context = {"suggestions": suggestions}
+    else:
+        all_movies = Movie.objects.all()[:30]
+        column1_movies = all_movies[0::3]  # Cada 3ra película empieza en 0
+        column2_movies = all_movies[1::3]  # Cada 3ra película empieza en 1
+        column3_movies = all_movies[2::3]  # Cada 3ra película empieza en 2
+
+        context = {
+            "column1_movies": column1_movies,
+            "column2_movies": column2_movies,
+            "column3_movies": column3_movies
+        }
+
+    return render(request, 'movies/home.html', context)
 
 def movies_view(request):
     genre_id = request.GET.get('genre')

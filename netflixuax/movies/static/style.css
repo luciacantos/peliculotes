@@ -205,6 +205,42 @@ header {
     border: 2px solid white; /* Un borde para resaltarlo */
 }
 
+
+/* Botones de calificación */
+.rating-buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.rating-buttons a {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+
+.like-btn {
+    background-color: green;
+    color: white;
+}
+
+.dislike-btn {
+    background-color: red;
+    color: white;
+}
+
+.rating-buttons a:hover {
+    opacity: 0.8;
+}
+
+
 /* Estilo de las categorías en la página principal */
 .category-section {
     margin-bottom: 50px;
@@ -224,3 +260,39 @@ h1, h2, h3, h4, h5, h6, p, a, span {
 }
 
 
+/* Contenedor principal del ticker */
+.ticker-container {
+    display: flex;
+    justify-content: space-around;
+    overflow: hidden;
+    gap: 20px; /* Espacio entre las columnas */
+    margin: 50px auto;
+    max-width: 1200px;
+    height: 500px; /* Altura fija */
+}
+
+/* Columnas del ticker */
+.ticker-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: scroll 10s linear infinite; /* Animación continua */
+}
+
+/* Cada elemento (imagen) del ticker */
+.ticker-item img {
+    width: 100%; /* Ajusta el ancho de la imagen */
+    max-width: 300px; /* Máximo tamaño de imagen */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Animación para el scroll */
+@keyframes scroll {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}

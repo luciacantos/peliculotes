@@ -50,6 +50,51 @@
             Por favor, <a href="{% url 'login' %}" style="color: pink; text-decoration: none;">inicia sesión</a> o 
             <a href="{% url 'register' %}" style="color: pink; text-decoration: none;">regístrate</a> para disfrutar de la experiencia completa.
         </p>
+
+        <!-- Ticker animado -->
+<div class="ticker-container">
+    <div class="ticker-column">
+        {% for movie in column1_movies %}
+        <div class="ticker-item">
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+        </div>
+        {% endfor %}
+        <!-- Clona los elementos para hacer el scroll continuo -->
+        {% for movie in column1_movies %}
+        <div class="ticker-item">
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="ticker-column">
+        {% for movie in column2_movies %}
+        <div class="ticker-item">
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+        </div>
+        {% endfor %}
+        <!-- Clona los elementos para hacer el scroll continuo -->
+        {% for movie in column2_movies %}
+        <div class="ticker-item">
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="ticker-column">
+        {% for movie in column3_movies %}
+        <div class="ticker-item">
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+        </div>
+        {% endfor %}
+        <!-- Clona los elementos para hacer el scroll continuo -->
+        {% for movie in column3_movies %}
+        <div class="ticker-item">
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+        </div>
+        {% endfor %}
+    </div>
+</div>
     {% endif %}
 </div>
 {% endblock %}
