@@ -8,7 +8,7 @@ from .forms import CustomUserCreationForm, UpdateUsernameForm, UserGenresForm, U
 from django.db.models import Q
 
 
-def home_view(request):
+def home_view(request): 
     if request.user.is_authenticated:
         liked_movies = ViewedMovie.objects.filter(user=request.user, liked=True).values_list('movie_id', flat=True)
         suggestions = Movie.objects.filter(~Q(id__in=liked_movies))[:10]
