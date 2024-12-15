@@ -3,17 +3,48 @@
 {% block title %}Series{% endblock %}
 
 {% block content %}
-<h1 style="text-align: center; color: pink;">Series</h1>
-<div class="movie-grid">
-    {% for serie in series %}
-    <div class="movie-item">
-        <a href="{% url 'series_detail' serie.id %}">
-            <img src="https://image.tmdb.org/t/p/w500{{ serie.poster_path }}" alt="{{ serie.title }}">
-            <h3>{{ serie.title }}</h3>
-        </a>
-    </div>
-    {% empty %}
-    <p style="text-align: center; color: white;">No se encontraron series.</p>
+<h1 class="page-title">Series</h1>
+
+<!-- Botones de géneros -->
+<div class="genre-buttons-container">
+    {% for genre in genres %}
+    <a href="?genre={{ genre.id }}" class="{% if genre_selected and genre.id == genre_selected.id %}active{% endif %}">
+        {{ genre.name }}
+    </a>
     {% endfor %}
 </div>
+
+<!-- Series por género o categoría -->
+{% if genre_selected %}
+    <h2 class="section-title">Series de {{ genre_selected.name }}</h2>
+    <div class="movie-grid">
+        {% for serie in series %}
+        <div class="movie-item">
+            <a href="{% url 'series_detail' serie.id %}">
+                <img src="https://image.tmdb.org/t/p/w500{{ serie.poster_path }}" alt="{{ serie.title }}">
+                <h3>{{ serie.title }}</h3>
+            </a>
+        </div>
+        {% empty %}
+        <p class="no-movies">No se encontraron series en este género.</p>
+        {% endfor %}
+    </div>
+{% else %}
+    {% for category, series_in_category in categorized_series.items %}
+    <h2 class="section-title">{{ category }}</h2>
+    <div class="movie-grid">
+        {% for serie in series_in_category %}
+        <div class="movie-item">
+            <a href="{% url 'series_detail' serie.id %}">
+                <img src="https://image.tmdb.org/t/p/w500{{ serie.poster_path }}" alt="{{ serie.title }}">
+                <h3>{{ serie.title }}</h3>
+            </a>
+        </div>
+        {% empty %}
+        <p class="no-movies">No se encontraron series en esta categoría.</p>
+        {% endfor %}
+    </div>
+    {% endfor %}
+{% endif %}
 {% endblock %}
+

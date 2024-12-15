@@ -3,29 +3,51 @@
 {% block title %}Películas{% endblock %}
 
 {% block content %}
-<h1 style="text-align: center; color: pink;">Películas</h1>
+<h1 class="page-title">Películas</h1>
 
-<!-- Filtros por género -->
+<!-- Botones de géneros -->
 <div class="genre-buttons-container">
     {% for genre in genres %}
-    <a href="?genre={{ genre.id }}" class="{% if request.GET.genre|default:'' == genre.id|stringformat:'s' %}active{% endif %}">
+    <a href="?genre={{ genre.id }}" class="{% if genre == genre_selected %}active{% endif %}">
         {{ genre.name }}
     </a>
     {% endfor %}
 </div>
 
-
-<!-- Lista de películas -->
-<div class="movie-grid">
-    {% for movie in movies %}
-    <div class="movie-item">
-        <a href="{% url 'movie_detail' movie.id %}">
-            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
-            <h3>{{ movie.title }}</h3>
-        </a>
+<!-- Mostrar películas por género o categorías -->
+{% if genre_selected %}
+    <!-- Mostrar solo las películas del género seleccionado -->
+    <h2 class="page-title">{{ genre_selected.name }}</h2>
+    <div class="movie-grid">
+        {% for movie in movies %}
+        <div class="movie-item">
+            <a href="{% url 'movie_detail' movie.id %}">
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                <h3>{{ movie.title }}</h3>
+            </a>
+        </div>
+        {% empty %}
+        <p class="no-movies">No se encontraron películas para este género.</p>
+        {% endfor %}
     </div>
-    {% empty %}
-    <p style="text-align: center; color: white;">No se encontraron películas para este género.</p>
+{% else %}
+    <!-- Mostrar películas por categorías -->
+    {% for category, movies in categorized_movies.items %}
+    <h2 class="category-title">{{ category }}</h2>
+    <div class="movie-grid">
+        {% for movie in movies %}
+        <div class="movie-item">
+            <a href="{% url 'movie_detail' movie.id %}">
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                <h3>{{ movie.title }}</h3>
+            </a>
+        </div>
+        {% empty %}
+        <p class="no-movies">No se encontraron películas en esta categoría.</p>
+        {% endfor %}
+    </div>
     {% endfor %}
-</div>
+{% endif %}
 {% endblock %}
+
+

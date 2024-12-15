@@ -1,21 +1,21 @@
 /* Fondo de la página */
 body {
-    background-color: black;
-    color: white;
-    font-family: 'Roboto', sans-serif;
+    background-color: black; /* Fondo negro */
+    color: white; /* Texto predeterminado en blanco */
+    font-family: 'Roboto', sans-serif; /* Cambiada a Roboto */
     margin: 0;
     padding: 0;
 }
 
 /* Cabecera */
 header {
-    background-color: pink;
-    padding: 15px 30px;
-    border-bottom: 3px solid #e41cb8;
+    background-color: pink; /* Fondo rosa */
+    padding: 15px 30px; /* Aumentar espacio alrededor */
+    border-bottom: 3px solid #e41cb8; /* Línea inferior más marcada */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Fuente moderna */
 }
 
 /* Contenedor de navegación */
@@ -23,16 +23,16 @@ header {
     display: flex;
     align-items: center;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-between; /* Distribuye espacio entre los elementos */
 }
 
 /* Usuario alineado a la izquierda */
 .user {
     font-size: 18px;
-    color: white;
+    color: white; /* Nombre de usuario en blanco */
     text-transform: uppercase;
     font-weight: bold;
-    margin-right: 20px;
+    margin-right: 20px; /* Espacio entre usuario y logo */
 }
 
 /* Logo centrado */
@@ -43,7 +43,7 @@ header {
 
 .logo .logo-link {
     text-decoration: none;
-    color: #e41cb8;
+    color: #e41cb8; /* Rosa fuerte */
     font-size: 24px;
     font-weight: bold;
     text-transform: uppercase;
@@ -51,13 +51,13 @@ header {
 }
 
 .logo .logo-link:hover {
-    color: #ff69b4;
+    color: #ff69b4; /* Cambia a rosa más claro al pasar el cursor */
 }
 
 /* Enlaces alineados a la derecha */
 .nav-links {
     display: flex;
-    gap: 25px;
+    gap: 25px; /* Espaciado entre enlaces */
 }
 
 .nav-links a, .nav-links form button {
@@ -66,21 +66,21 @@ header {
     font-size: 18px;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 5px;
+    padding: 10px 15px; /* Aumentar área de clic */
+    border-radius: 5px; /* Esquinas redondeadas */
     transition: all 0.3s ease;
 }
 
 /* Página activa */
 .nav-links a.active, .nav-links form button.active {
-    background-color: #ff69b4;
-    color: white;
+    background-color: #ff69b4; /* Fondo rosa claro */
+    color: white; /* Texto blanco */
 }
 
 /* Hover en los enlaces */
 .nav-links a:hover, .nav-links form button:hover {
-    background-color: #ff69b4;
-    color: white;
+    background-color: #ff69b4; /* Fondo al pasar el cursor */
+    color: white; /* Texto blanco */
 }
 
 /* Botón de cerrar sesión */
@@ -93,63 +93,28 @@ header {
 /* Enlace del usuario */
 .user-link {
     text-decoration: none;
-    color: white;
+    color: white; /* Blanco para resaltar */
     font-size: 18px;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 5px 10px;
-    border: 2px solid transparent;
+    padding: 5px 10px; /* Espaciado interno */
+    border: 2px solid transparent; /* Borde transparente por defecto */
     transition: all 0.3s ease;
 }
 
 .user-link:hover {
-    border: 2px solid white;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Botones de géneros con espacio entre filas */
-.genre-buttons-container {
-    display: flex;
-    flex-wrap: wrap; /* Permitir varias filas */
-    gap: 20px; /* Espacio entre botones */
-    justify-content: flex-start; /* Alineación de los botones */
-    padding: 20px;
-    margin-bottom: 30px; /* Espacio con el contenido siguiente */
-}
-
-.genre-buttons-container a {
-    display: inline-block;
-    padding: 15px 25px; /* Tamaño más grande */
-    font-size: 22px; /* Letra más grande */
-    font-weight: bold;
-    background-color: pink;
-    color: black;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.genre-buttons-container a:hover {
-    background-color: #ff69b4;
-    color: white;
-}
-
-
-.genre-buttons-container a.active {
-    background-color: #ff69b4; /* Un color más destacado */
-    color: white; /* Texto en blanco */
-    font-weight: bold;
-    border: 2px solid white; /* Un borde para resaltarlo */
+    border: 2px solid white; /* Borde blanco al pasar el cursor */
+    border-radius: 5px; /* Esquinas redondeadas */
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
 }
 
 /* Grid de películas y series */
 .movie-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajusta automáticamente las columnas */
+    gap: 20px; /* Espaciado entre elementos */
+    justify-content: center; /* Centra los elementos en el contenedor */
     padding: 20px;
-    justify-content: center;
 }
 
 /* Estilo de cada película/serie */
@@ -206,39 +171,56 @@ header {
     line-height: 1.5;
 }
 
-/* Botones */
-.add-btn, .remove-btn, .view-btn {
+/* Botones de géneros con espacio entre filas */
+.genre-buttons-container {
+    display: flex;
+    flex-wrap: wrap; /* Permitir varias filas */
+    gap: 20px; /* Espacio entre botones */
+    justify-content: center; /* Centrar los botones horizontalmente */
+    padding: 20px;
+    margin-bottom: 30px; /* Espacio con el contenido siguiente */
+}
+
+.genre-buttons-container a {
     display: inline-block;
-    margin-top: 20px;
-    padding: 10px 15px;
-    font-size: 14px;
+    padding: 15px 25px; /* Tamaño más grande */
+    font-size: 22px; /* Letra más grande */
+    font-weight: bold;
+    background-color: pink;
+    color: black;
     border-radius: 5px;
-    text-transform: uppercase;
     text-decoration: none;
-    color: white;
     transition: all 0.3s ease;
 }
 
-.add-btn {
-    background-color: pink;
-}
-
-.remove-btn {
-    background-color: red;
-}
-
-.view-btn {
-    background-color: green;
-}
-
-.add-btn:hover {
+.genre-buttons-container a:hover {
     background-color: #ff69b4;
+    color: white;
 }
 
-.remove-btn:hover {
-    background-color: darkred;
+.genre-buttons-container a.active {
+    background-color: #ff69b4; /* Un color más destacado */
+    color: white; /* Texto en blanco */
+    font-weight: bold;
+    border: 2px solid white; /* Un borde para resaltarlo */
 }
 
-.view-btn:hover {
-    background-color: darkgreen;
+/* Estilo de las categorías en la página principal */
+.category-section {
+    margin-bottom: 50px;
 }
+
+.category-title {
+    color: pink;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* General */
+h1, h2, h3, h4, h5, h6, p, a, span {
+    color: white; /* Asegura que todo el texto sea visible */
+}
+
+

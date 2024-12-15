@@ -4,7 +4,7 @@ from movies.models import Genre
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, logout, update_session_auth_hash
-from .forms import CustomUserCreationForm, UpdateUsernameForm, UserGenresForm
+from .forms import CustomUserCreationForm, UpdateUsernameForm, UserGenresForm, UserCreationForm
 from django.db.models import Q
 
 
@@ -13,45 +13,68 @@ def home_view(request):
     return render(request, 'movies/home.html')
 
 def movies_view(request):
-    genre_id = request.GET.get('genre')  # Obtener el género seleccionado
-    if genre_id:
-        movies = Movie.objects.filter(genres__id=genre_id).distinct()
-    else:
-        movies = Movie.objects.all()
+    genre_id = request.GET.get('genre')
+    genre_selected = None
+    movies_query = Movie.objects.all()
 
-    genres = Genre.objects.all()  # Obtener todos los géneros para los botones
+
+    if genre_id:
+        try:
+            genre_selected = Genre.objects.get(id=genre_id)
+            movies_query = movies_query.filter(genres=genre_selected)
+        except Genre.DoesNotExist:
+            genre_selected = None
+
+
+    categorized_movies = None
+    if not genre_selected:
+        categorized_movies = {
+            "Populares": movies_query.filter(category="Populares"),
+            "Mejor Valoradas": movies_query.filter(category="Mejor Valoradas"),
+            "Próximamente": movies_query.filter(category="Próximamente"),
+            "En Cines": movies_query.filter(category="En Cines"),
+        }
+
 
     context = {
-        'movies': movies,
-        'genres': genres,
+        "genres": Genre.objects.all(),
+        "genre_selected": genre_selected,
+        "categorized_movies": categorized_movies,
+        "movies": movies_query if genre_selected else None,
     }
+
     return render(request, 'movies/movies.html', context)
 
 def series_view(request):
-    search_query = request.GET.get('search', '')
-    if search_query:
-        series = Series.objects.filter(Q(title__icontains=search_query))
-    else:
-        series = Series.objects.all()
+    genre_id = request.GET.get('genre')
+    genre_selected = None
+    series_query = Series.objects.all()
+
+    if genre_id:
+        try:
+            genre_selected = Genre.objects.get(id=genre_id)
+            series_query = series_query.filter(genres=genre_selected)
+        except Genre.DoesNotExist:
+            genre_selected = None
+
+
+    categorized_series = None
+    if not genre_selected:
+        categorized_series = {
+            "Populares": series_query.filter(category="Populares"),
+            "Mejor Valoradas": series_query.filter(category="Mejor Valoradas"),
+            "Próximamente": series_query.filter(category="Próximamente"),
+            "En Emisión": series_query.filter(category="En Emisión"),
+        }
 
     context = {
-        'series': series,
-        'show_search': True,
-        'search_type': 'series',
+        "genres": Genre.objects.all(),
+        "genre_selected": genre_selected,
+        "categorized_series": categorized_series,
+        "series": series_query if genre_selected else None,
     }
+
     return render(request, 'movies/series.html', context)
-
-
-def register(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'movies/register.html', {'form': form})
-
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -82,6 +105,16 @@ def home_view(request):
         suggestions = Movie.objects.all()[:10]  # Mostrar cualquier película para usuarios no autenticados
     return render(request, 'movies/home.html', {'suggestions': suggestions})
 
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'movies/register.html', {'form': form})
 
 @login_required
 def user_settings(request):
