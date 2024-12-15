@@ -8,12 +8,15 @@
 {% if favourite_movies %}
 <div class="movie-grid">
     {% for fav in favourite_movies %}
-        <div class="movie-item">
-            <img src="https://image.tmdb.org/t/p/w500{{ fav.movie.poster_path }}" alt="{{ fav.movie.title }}">
-            <h3>{{ fav.movie.title }}</h3>
-            <a href="{% url 'remove_favorite' fav.movie.id %}" class="remove-btn">Eliminar</a>
+    <div class="movie-item">
+        <img src="https://image.tmdb.org/t/p/w500{{ fav.movie.poster_path }}" alt="{{ fav.movie.title }}">
+        <h3>{{ fav.movie.title }}</h3>
+        <div class="action-buttons">
+            <a href="{% url 'remove_favorite' fav.movie.id %}" class="delete-btn">Eliminar</a>
             <a href="{% url 'mark_as_viewed_movie' fav.movie.id %}" class="view-btn">Vista</a>
         </div>
+    </div>
+
     {% endfor %}
 </div>
 {% else %}
@@ -27,13 +30,16 @@
         <div class="movie-item">
             <img src="https://image.tmdb.org/t/p/w500{{ fav.series.poster_path }}" alt="{{ fav.series.title }}">
             <h3>{{ fav.series.title }}</h3>
-            <a href="{% url 'remove_favorite_series' fav.series.id %}" class="remove-btn">Eliminar</a>
-            <a href="{% url 'mark_as_viewed_series' fav.series.id %}" class="view-btn">Vista</a>
+            <div class="action-buttons">
+                <a href="{% url 'remove_favorite_series' fav.series.id %}" class="delete-btn">Eliminar</a>
+                <a href="{% url 'mark_as_viewed_series' fav.series.id %}" class="view-btn">Vista</a>
+            </div>
         </div>
     {% endfor %}
 </div>
 {% else %}
 <p>No tienes ninguna serie guardada en tu lista.</p>
 {% endif %}
+
 
 {% endblock %}

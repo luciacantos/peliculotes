@@ -18,10 +18,11 @@ def home_view(request):
 
 def movies_view(request):
     genre_id = request.GET.get('genre')
+    search_query = request.GET.get('search', '').strip()  # Obtener el término de búsqueda
     genre_selected = None
     movies_query = Movie.objects.all()
 
-
+    # Filtrar por género si se selecciona uno
     if genre_id:
         try:
             genre_selected = Genre.objects.get(id=genre_id)
@@ -29,9 +30,13 @@ def movies_view(request):
         except Genre.DoesNotExist:
             genre_selected = None
 
+    # Filtrar por búsqueda si hay término ingresado
+    if search_query:
+        movies_query = movies_query.filter(title__icontains=search_query)
 
+    # Categorías solo cuando no hay género seleccionado ni búsqueda activa
     categorized_movies = None
-    if not genre_selected:
+    if not genre_selected and not search_query:
         categorized_movies = {
             "Populares": movies_query.filter(category="Populares"),
             "Mejor Valoradas": movies_query.filter(category="Mejor Valoradas"),
@@ -39,21 +44,24 @@ def movies_view(request):
             "En Cines": movies_query.filter(category="En Cines"),
         }
 
-
     context = {
         "genres": Genre.objects.all(),
         "genre_selected": genre_selected,
         "categorized_movies": categorized_movies,
-        "movies": movies_query if genre_selected else None,
+        "movies": movies_query if genre_selected or search_query else None,
+        "search_query": search_query,  # Para mantener el término en el campo de búsqueda
     }
 
     return render(request, 'movies/movies.html', context)
 
+
 def series_view(request):
     genre_id = request.GET.get('genre')
+    search_query = request.GET.get('search', '').strip()  # Obtener el término de búsqueda
     genre_selected = None
     series_query = Series.objects.all()
 
+    # Filtrar por género si se selecciona uno
     if genre_id:
         try:
             genre_selected = Genre.objects.get(id=genre_id)
@@ -61,9 +69,13 @@ def series_view(request):
         except Genre.DoesNotExist:
             genre_selected = None
 
+    # Filtrar por búsqueda si hay término ingresado
+    if search_query:
+        series_query = series_query.filter(title__icontains=search_query)
 
+    # Categorías solo cuando no hay género seleccionado ni búsqueda activa
     categorized_series = None
-    if not genre_selected:
+    if not genre_selected and not search_query:
         categorized_series = {
             "Populares": series_query.filter(category="Populares"),
             "Mejor Valoradas": series_query.filter(category="Mejor Valoradas"),
@@ -75,10 +87,13 @@ def series_view(request):
         "genres": Genre.objects.all(),
         "genre_selected": genre_selected,
         "categorized_series": categorized_series,
-        "series": series_query if genre_selected else None,
+        "series": series_query if genre_selected or search_query else None,
+        "search_query": search_query,  # Para mantener el término en el campo de búsqueda
     }
 
     return render(request, 'movies/series.html', context)
+
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)

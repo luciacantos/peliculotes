@@ -3,51 +3,36 @@
 {% block title %}Películas{% endblock %}
 
 {% block content %}
-<h1 class="page-title">Películas</h1>
+<div class="search-container">
+    <form method="get" action="{% url 'movies' %}">
+        <input type="text" name="search" placeholder="Buscar películas..." value="{{ request.GET.search }}" class="search-input">
+        <button type="submit" class="search-btn">Buscar</button>
+    </form>
+</div>
 
-<!-- Botones de géneros -->
 <div class="genre-buttons-container">
     {% for genre in genres %}
-    <a href="?genre={{ genre.id }}" class="{% if genre == genre_selected %}active{% endif %}">
-        {{ genre.name }}
-    </a>
+    <a href="?genre={{ genre.id }}" class="{% if genre_selected and genre.id == genre_selected.id %}active{% endif %}">{{ genre.name }}</a>
     {% endfor %}
 </div>
 
-<!-- Mostrar películas por género o categorías -->
-{% if genre_selected %}
-    <!-- Mostrar solo las películas del género seleccionado -->
-    <h2 class="page-title">{{ genre_selected.name }}</h2>
-    <div class="movie-grid">
-        {% for movie in movies %}
-        <div class="movie-item">
-            <a href="{% url 'movie_detail' movie.id %}">
-                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
-                <h3>{{ movie.title }}</h3>
-            </a>
-        </div>
-        {% empty %}
-        <p class="no-movies">No se encontraron películas para este género.</p>
-        {% endfor %}
-    </div>
-{% else %}
-    <!-- Mostrar películas por categorías -->
-    {% for category, movies in categorized_movies.items %}
-    <h2 class="category-title">{{ category }}</h2>
-    <div class="movie-grid">
-        {% for movie in movies %}
-        <div class="movie-item">
-            <a href="{% url 'movie_detail' movie.id %}">
-                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
-                <h3>{{ movie.title }}</h3>
-            </a>
-        </div>
-        {% empty %}
-        <p class="no-movies">No se encontraron películas en esta categoría.</p>
-        {% endfor %}
-    </div>
-    {% endfor %}
+{% if search_query %}
+<h2 class="category-title">Resultados para "{{ search_query }}"</h2>
 {% endif %}
+
+<div class="movie-grid">
+    {% for movie in movies %}
+    <div class="movie-item">
+        <a href="{% url 'movie_detail' movie.id %}">
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+            <h3>{{ movie.title }}</h3>
+        </a>
+    </div>
+    {% empty %}
+    <p>No se encontraron películas para esta búsqueda.</p>
+    {% endfor %}
+</div>
 {% endblock %}
+
 
 

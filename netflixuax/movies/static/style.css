@@ -31,13 +31,13 @@ header {
     color: white;
     font-weight: bold;
     text-transform: uppercase;
-    margin-right: 20px; /* Separación con la siguiente sección */
+    margin-right: 20px;
 }
 
 .logo {
     flex-grow: 1;
     text-align: center;
-    letter-spacing: 2px; /* Separar las letras de PELICULINCHIS */
+    letter-spacing: 2px;
 }
 
 .logo-link {
@@ -50,10 +50,11 @@ header {
 
 .nav-links {
     display: flex;
-    gap: 20px; /* Espaciado uniforme entre enlaces */
+    gap: 20px;
 }
 
-.nav-links a, .nav-links form button {
+.nav-links a,
+.nav-links form button {
     text-decoration: none;
     color: black;
     background-color: white;
@@ -64,7 +65,14 @@ header {
     transition: all 0.3s ease;
 }
 
-.nav-links a:hover, .nav-links form button:hover {
+.nav-links a.active,
+.nav-links form button.active {
+    background-color: #e41cb8; /* Color de fondo activo */
+    color: white;
+}
+
+.nav-links a:hover,
+.nav-links form button:hover {
     background-color: #ff69b4;
     color: white;
 }
@@ -73,6 +81,121 @@ header {
     background: none;
     border: none;
     cursor: pointer;
+}
+
+
+.nav-button {
+    background-color: #ff69b4;
+    color: black; /* Texto negro */
+    padding: 10px 15px; /* Tamaño del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Fuente en negrita */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    text-decoration: none; /* Sin subrayado */
+    border: none; /* Sin bordes adicionales */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+.nav-button:hover {
+    background-color: #f8f8f8;
+    color: rgb(0, 0, 0);
+    transform: scale(1.05); /* Efecto de zoom al pasar el cursor */
+}
+
+
+/* --- Buscador --- */
+.search-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.search-container button {
+    background-color: #ff69b4;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.search-container button:hover {
+    background-color: #e41cb8;
+}
+
+/* --- Botones en "Mi Lista" y "Vistas" --- */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Espacio entre botones */
+    margin-top: 10px;
+}
+
+.action-buttons a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 15px; /* Botones ligeramente más grandes */
+    border-radius: 8px; /* Esquinas redondeadas */
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    transition: all 0.3s ease; /* Transición suave */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+}
+
+.delete-btn {
+    background-color: #e63946; /* Rojo más vibrante */
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #b71c1c; /* Rojo más oscuro al hacer hover */
+    transform: scale(1.05); /* Efecto de zoom al pasar el cursor */
+}
+
+.view-btn {
+    background-color: #2a9d8f; /* Verde atractivo */
+    color: white;
+}
+
+.view-btn:hover {
+    background-color: #1b6f5b; /* Verde más oscuro al hacer hover */
+    transform: scale(1.05); /* Efecto de zoom al pasar el cursor */
+}
+
+
+/* --- Botones de Calificación (Like/Dislike) --- */
+.rating-buttons a {
+    display: inline-block;
+    font-size: 18px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.like-btn {
+    background-color: green;
+}
+
+.dislike-btn {
+    background-color: red;
+}
+
+.rating-buttons a:hover {
+    opacity: 0.8;
 }
 
 /* --- Botones de Géneros --- */
@@ -135,67 +258,6 @@ header {
     transform: scale(1.05);
 }
 
-/* --- Botones en "Mi Lista" y "Vistas" --- */
-.action-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.action-buttons a {
-    display: inline-block;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    text-transform: uppercase;
-}
-
-.delete-btn {
-    background-color: red;
-    color: white;
-}
-
-.delete-btn:hover {
-    background-color: darkred;
-}
-
-.view-btn {
-    background-color: green;
-    color: white;
-}
-
-.view-btn:hover {
-    background-color: darkgreen;
-}
-
-/* --- Botones de Calificación (Like/Dislike) --- */
-.rating-buttons a {
-    display: inline-block;
-    font-size: 18px;
-    padding: 5px 10px;
-    text-decoration: none;
-    color: white;
-    border-radius: 5px;
-    margin: 0 5px;
-    transition: all 0.3s ease;
-}
-
-.like-btn {
-    background-color: green;
-}
-
-.dislike-btn {
-    background-color: red;
-}
-
-.rating-buttons a:hover {
-    opacity: 0.8;
-}
-
 /* --- Categorías en la Página Principal --- */
 .category-section {
     margin-bottom: 50px;
@@ -213,7 +275,6 @@ h3, h2, h1, p, a {
     text-decoration: none;
 }
 
-
 /* Footer */
 footer p {
     text-align: center;
@@ -222,3 +283,32 @@ footer p {
     margin-top: 20px;
 }
 
+
+.search-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.search-btn {
+    background-color: pink;
+    color: black;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #ff69b4;
+    color: white;
+}
