@@ -5,6 +5,7 @@
 {% block content %}
 <div style="text-align: center; margin-top: 50px; color: pink;">
     {% if user.is_authenticated %}
+        <!-- Mensaje de bienvenida -->
         <h1 style="font-size: 50px; font-family: 'Arial', sans-serif; color: pink; text-shadow: 2px 2px 5px black;">
             ¡Bienvenido, <span style="color: white; text-transform: uppercase;">{{ user.username }}</span>!
         </h1>
@@ -19,17 +20,21 @@
         <div class="carousel-container" style="position: relative; max-width: 500px; margin: 30px auto; overflow: hidden;">
             <div class="carousel" style="display: flex; transition: transform 0.5s ease-in-out;">
                 {% for movie in suggestions %}
-                <div class="carousel-item" style="min-width: 100%; text-align: center;">
-                    <a href="{% url 'movie_detail' movie.id %}">
-                        <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" style="border-radius: 8px; max-width: 100%; height: auto;">
-                    </a>
-                    <h3 style="color: white; font-size: 18px; margin-top: 10px;">{{ movie.title }}</h3>
-                </div>
+                    <div class="carousel-item" style="min-width: 100%; text-align: center;">
+                        <a href="{% url 'movie_detail' movie.id %}">
+                            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" 
+                                 alt="{{ movie.title }}" 
+                                 style="border-radius: 8px; max-width: 100%; height: auto;">
+                        </a>
+                        <h3 style="color: white; font-size: 18px; margin-top: 10px;">{{ movie.title }}</h3>
+                    </div>
                 {% empty %}
-                <p style="color: white;">No tenemos sugerencias para ti en este momento. ¡Sigue explorando y calificando!</p>
+                    <p style="color: white;">No tenemos sugerencias para ti en este momento. ¡Sigue explorando y calificando!</p>
                 {% endfor %}
             </div>
         </div>
+
+        <!-- Carrusel Script -->
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const carousel = document.querySelector('.carousel');
@@ -43,90 +48,95 @@
             });
         </script>
     {% else %}
-    <h1 class="zooming-title">
-        ¡Bienvenido a Peliculinchis!
-    </h1>
-    
-    <style>
-        .zooming-title {
-            font-size: 50px;
-            font-family: 'Arial', sans-serif;
-            color: pink;
-            text-shadow: 2px 2px 5px black;
-            animation: zoomInOut 4s infinite; /* Animación infinita */
-        }
-    
-        @keyframes zoomInOut {
-            0%, 100% {
-                transform: scale(1);
+        <!-- Título de bienvenida -->
+        <h1 class="zooming-title">
+            ¡Bienvenido a Peliculinchis!
+        </h1>
+        <p style="font-size: 20px; font-family: 'Arial', sans-serif; margin-top: 20px; color: white;">
+            Por favor, <a href="{% url 'login' %}" style="color: pink; text-decoration: none;">inicia sesión</a> o 
+            <a href="{% url 'register' %}" style="color: pink; text-decoration: none;">regístrate</a> para disfrutar de la experiencia completa.
+        </p>
+
+        <!-- Contenedor de imágenes flotantes -->
+        <div class="floating-images-container"></div>
+
+        <!-- Script para imágenes flotantes -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const container = document.querySelector(".floating-images-container");
+
+                // Lista de imágenes de películas sugeridas
+                const moviesAndSeries = [
+                    {% for movie in suggestions %}
+                        "https://image.tmdb.org/t/p/w500{{ movie.poster_path }}",
+                    {% endfor %}
+                ];
+
+                // Función para crear y mover imágenes
+                function createFloatingImage() {
+                    const img = document.createElement("img");
+                    img.src = moviesAndSeries[Math.floor(Math.random() * moviesAndSeries.length)];
+                    img.classList.add("floating-image");
+                    img.style.left = Math.random() * 100 + "vw"; // Posición horizontal aleatoria
+                    img.style.top = "100vh"; // Empieza desde abajo
+
+                    container.appendChild(img);
+
+                    // Animación hacia arriba
+                    setTimeout(() => {
+                        img.style.transform = "translateY(-120vh)"; // Sube fuera de la pantalla
+                        img.style.opacity = "0"; // Se desvanece
+                    }, 50);
+
+                    // Eliminar imagen después de la animación
+                    setTimeout(() => img.remove(), 15000); // Duración total de 15s
+                }
+
+                // Generar una nueva imagen cada 1.5 segundos
+                setInterval(createFloatingImage, 1500);
+            });
+        </script>
+
+        <!-- Estilo para imágenes flotantes -->
+        <style>
+            .floating-images-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                overflow: hidden;
+                z-index: -1;
             }
-            50% {
-                transform: scale(1.1); /* Zoom al 110% */
-            }
-        }
-    </style>
-    <p style="font-size: 20px; font-family: 'Arial', sans-serif; margin-top: 20px; color: white;">
-        Por favor, <a href="{% url 'login' %}" style="color: pink; text-decoration: none;">inicia sesión</a> o 
-        <a href="{% url 'register' %}" style="color: pink; text-decoration: none;">regístrate</a> para disfrutar de la experiencia completa.
-    </p>
 
-    <!-- Animación flotante de imágenes -->
-    <div class="animation-container"></div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const container = document.querySelector(".animation-container");
-
-            // Usar sugerencias también en el caso de usuario no autenticado
-            const moviesAndSeries = [
-                {% for movie in suggestions %}
-                    "https://image.tmdb.org/t/p/w500{{ movie.poster_path }}",
-                {% endfor %}
-            ];
-
-            // Crear imagen flotante
-            function createFloatingImage() {
-                const img = document.createElement("img");
-                img.src = moviesAndSeries[Math.floor(Math.random() * moviesAndSeries.length)];
-                img.style.position = "absolute";
-                img.style.top = Math.random() * 90 + "vh";
-                img.style.left = Math.random() * 100 + "vw";
-                img.style.width = Math.random() * 350 + 150 + "px"; // Tamaño más grande
-                img.style.transition = "transform 12s linear, opacity 12s ease-out"; // Mayor duración
-                img.style.opacity = "1";
-                img.style.zIndex = "0";
-
-                container.appendChild(img);
-
-                setTimeout(() => {
-                    img.style.transform = `translateY(-${Math.random() * 300 + 100}px)`; // Mayor desplazamiento
-                    img.style.opacity = "0";
-                    setTimeout(() => img.remove(), 12000); // Eliminar después de 12s
-                }, 50);
+            .floating-image {
+                position: absolute;
+                width: 120px;
+                height: auto;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+                opacity: 1;
+                transition: transform 12s linear, opacity 12s ease-out;
             }
 
-            // Crear nuevas imágenes cada 2.5 segundos
-            setInterval(createFloatingImage, 2500);
-        });
-    </script>
+            .zooming-title {
+                font-size: 50px;
+                font-family: 'Arial', sans-serif;
+                color: pink;
+                text-shadow: 2px 2px 5px black;
+                animation: zoomInOut 4s infinite;
+            }
 
-    <style>
-        .animation-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* No bloquea clics */
-            overflow: hidden;
-            z-index: -1; /* Detrás del contenido */
-        }
-
-        .animation-container img {
-            border-radius: 10px;
-            box-shadow: 0 8px 15px rgba(255, 255, 255, 0.4); /* Sombra más pronunciada */
-        }
-    </style>
-{% endif %}
+            @keyframes zoomInOut {
+                0%, 100% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.1);
+                }
+            }
+        </style>
+    {% endif %}
 </div>
 {% endblock %}

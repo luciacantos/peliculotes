@@ -1,3 +1,7 @@
+/* Importar la fuente Bebas Neue desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
 /* --- Estilo General --- */
 body {
     background-color: black;
@@ -6,6 +10,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 
 /* --- Cabecera --- */
 header {
@@ -17,44 +22,75 @@ header {
     align-items: center;
 }
 
+/* Contenedor principal de navegación */
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    list-style: none;
     margin: 0;
     padding: 0;
+    list-style: none;
+    flex-wrap: nowrap; /* Evita el desbordamiento */
+    overflow: hidden; /* Previene desbordamiento visible */
 }
 
-.user {
-    color: white;
+/* Secciones de navegación */
+.nav-left,
+.nav-center,
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left {
+    flex: 1;
+    justify-content: flex-start;
+}
+
+.nav-center {
+    flex: 1;
+    justify-content: center;
+}
+
+.nav-right {
+    flex: 1;
+    justify-content: flex-end;
+    gap: 15px;
+    flex-wrap: nowrap; /* Fuerza los elementos a permanecer en una fila */
+}
+
+/* --- Nombre de usuario --- */
+.user-link {
+    font-size: 30px;
     font-weight: bold;
+    color: white;
     text-transform: uppercase;
-    margin-right: 20px;
+    text-decoration: none;
 }
 
-.logo {
-    flex-grow: 1;
-    text-align: center;
-    letter-spacing: 2px;
-}
-
+/* --- Logo --- */
 .logo-link {
     text-decoration: none;
-    color: #e41cb8;
-    font-size: 24px;
-    font-weight: bold;
-    text-transform: uppercase;
+    color: #e41cb8; /* Color principal */
+    font-size: 70px; /* Tamaño más grande */
+    font-weight: 1000; /* Grosor extremo */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    letter-spacing: 7px; /* Mayor espaciado entre letras */
+    font-family: 'Bebas Neue', sans-serif; /* Fuente importada */
+    padding: 10px 0; /* Espaciado superior e inferior */
+    position: relative; /* Necesario para los bordes y sombras */
+    -webkit-text-stroke: 1px black; /* Bordes finos en negro */
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* Sombra negra */
 }
 
-.nav-links {
-    display: flex;
-    gap: 20px;
-}
 
+
+/* --- Estilo de botones y enlaces de navegación --- */
 .nav-links a,
-.nav-links form button {
+.nav-links form button,
+.nav-right a,
+.nav-right form button {
     text-decoration: none;
     color: black;
     background-color: white;
@@ -62,47 +98,75 @@ header {
     border-radius: 5px;
     font-weight: bold;
     text-transform: uppercase;
+    white-space: nowrap; /* Evita el salto de línea */
     transition: all 0.3s ease;
-}
-
-.nav-links a.active,
-.nav-links form button.active {
-    background-color: #e41cb8; /* Color de fondo activo */
-    color: white;
-}
-
-.nav-links a:hover,
-.nav-links form button:hover {
-    background-color: #ff69b4;
-    color: white;
-}
-
-.nav-links form button {
-    background: none;
+    text-align: center;
+    min-width: 110px; /* Ancho mínimo para botones */
     border: none;
     cursor: pointer;
+    display: inline-block;
 }
 
+/* Estado activo */
+.nav-links a.active,
+.nav-right a.active {
+    background-color: #e41cb8;
+    color: white;
+}
 
+/* Hover */
+.nav-links a:hover,
+.nav-links form button:hover,
+.nav-right a:hover,
+.nav-right form button:hover {
+    background-color: #ff69b4;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Botón específico: cerrar sesión */
 .nav-button {
     background-color: #ff69b4;
-    color: black; /* Texto negro */
-    padding: 10px 15px; /* Tamaño del botón */
-    border-radius: 5px; /* Bordes redondeados */
-    font-size: 16px; /* Tamaño de fuente */
-    font-weight: bold; /* Fuente en negrita */
-    text-transform: uppercase; /* Texto en mayúsculas */
-    text-decoration: none; /* Sin subrayado */
-    border: none; /* Sin bordes adicionales */
-    cursor: pointer; /* Cambia el cursor al pasar por encima */
-    transition: all 0.3s ease; /* Transición suave */
+    color: black;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
 }
 
 .nav-button:hover {
     background-color: #f8f8f8;
-    color: rgb(0, 0, 0);
-    transform: scale(1.05); /* Efecto de zoom al pasar el cursor */
+    color: black;
+    transform: scale(1.05);
 }
+/* Evita desbordamiento en la barra de navegación */
+.nav-right {
+    flex: 1;
+    justify-content: flex-end;
+    display: flex;
+    flex-wrap: wrap; /* Ajusta los elementos si no caben */
+    gap: 10px; /* Espaciado entre botones */
+}
+
+.nav-links a,
+.nav-links form button {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    text-align: center;
+    display: inline-block;
+    min-width: 100px; /* Fuerza un ancho mínimo */
+    box-sizing: border-box;
+}
+
+.nav-container {
+    flex-wrap: nowrap; /* Evita que se divida el nav-container */
+    overflow: hidden; /* Previene desbordamiento visible */
+}
+
+
 
 
 /* --- Buscador --- */
@@ -411,4 +475,44 @@ footer p {
     margin: 30px 0;
 }
 
+/* --- Estilo del título --- */
+.zooming-title {
+    font-size: 50px;
+    font-family: 'Arial', sans-serif;
+    color: pink;
+    text-shadow: 2px 2px 5px black;
+    animation: zoomInOut 4s infinite;
+}
+
+@keyframes zoomInOut {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* --- Contenedor de imágenes flotantes --- */
+.floating-images-container {
+    position: fixed; /* Cubre toda la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* No bloquea clics */
+    overflow: hidden;
+    z-index: -1; /* Detrás del contenido */
+}
+
+/* --- Estilo de las imágenes flotantes --- */
+.floating-image {
+    position: absolute;
+    width: 120px; /* Tamaño estándar */
+    height: auto;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Sombra pronunciada */
+    opacity: 1; /* Comienza visible */
+    transition: transform 12s linear, opacity 12s ease-out; /* Movimiento y desvanecimiento */
+}
 
