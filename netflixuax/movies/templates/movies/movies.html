@@ -4,6 +4,17 @@
 
 {% block content %}
 <h1 style="text-align: center; color: pink;">Películas</h1>
+
+<!-- Filtros por género -->
+<div style="text-align: center; margin-bottom: 20px;">
+    {% for genre in genres %}
+    <a href="?genre={{ genre.id }}" style="background-color: pink; color: black; padding: 10px 15px; border-radius: 5px; text-decoration: none; margin: 5px;">
+        {{ genre.name }}
+    </a>
+    {% endfor %}
+</div>
+
+<!-- Lista de películas -->
 <div class="movie-grid">
     {% for movie in movies %}
     <div class="movie-item">
@@ -13,7 +24,7 @@
         </a>
     </div>
     {% empty %}
-    <p style="text-align: center; color: white;">No se encontraron películas.</p>
+    <p style="text-align: center; color: white;">No se encontraron películas para este género.</p>
     {% endfor %}
 </div>
 {% endblock %}

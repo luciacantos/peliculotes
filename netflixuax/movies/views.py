@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Movie, FavouriteMovie, Series, FavouriteSeries, ViewedMovie, ViewedSeries, UserProfile
+from movies.models import Genre
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, logout, update_session_auth_hash
@@ -12,16 +13,17 @@ def home_view(request):
     return render(request, 'movies/home.html')
 
 def movies_view(request):
-    search_query = request.GET.get('search', '')
-    if search_query:
-        movies = Movie.objects.filter(Q(title__icontains=search_query))
+    genre_id = request.GET.get('genre')  # Obtener el género seleccionado
+    if genre_id:
+        movies = Movie.objects.filter(genres__id=genre_id).distinct()
     else:
         movies = Movie.objects.all()
 
+    genres = Genre.objects.all()  # Obtener todos los géneros para los botones
+
     context = {
         'movies': movies,
-        'show_search': True,
-        'search_type': 'películas',
+        'genres': genres,
     }
     return render(request, 'movies/movies.html', context)
 
