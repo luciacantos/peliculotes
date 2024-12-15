@@ -33,7 +33,6 @@ class Series(models.Model):
     category = models.CharField(max_length=50, null=True, blank=True)
 
 
-# paara crear lista de peliculitas favoritas
 class FavouriteMovie(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
@@ -52,37 +51,35 @@ class FavouriteSeries(models.Model):
     class Meta:
         unique_together = ('user', 'series')
 
+
 class ViewedMovie(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
-    liked = models.BooleanField(null=True, blank=True)  # Agregar este campo para "me gusta" o "no me gusta"
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    liked = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.movie.title} - Liked: {self.liked}"
 
+
 class ViewedSeries(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     series = models.ForeignKey(Series, on_delete=models.CASCADE)
-    liked = models.BooleanField(null=True, blank=True)  # Permite valores True, False o null
+    liked = models.BooleanField(null=True, blank=True)
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    favorite_genres = models.ManyToManyField('Genre', blank=True)
+    favorite_genres = models.ManyToManyField(Genre, blank=True)
 
     def __str__(self):
         return self.user.username
-
-class Genre(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
 
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
+
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
