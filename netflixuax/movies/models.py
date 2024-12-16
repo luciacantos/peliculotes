@@ -12,13 +12,17 @@ class Genre(models.Model):
 
 
 class Movie(models.Model):
-    tmdb_id = models.IntegerField(unique=True)
+    tmdb_id = models.IntegerField(unique=True, null=True, blank=True)
     title = models.CharField(max_length=255)
     overview = models.TextField(null=True, blank=True)
     release_date = models.DateField(null=True, blank=True)
     poster_path = models.CharField(max_length=255, null=True, blank=True)
     category = models.CharField(max_length=50, null=True, blank=True)
     genres = models.ManyToManyField(Genre, blank=True)
+    is_featured = models.BooleanField(default=False)  # Indica si es destacada
+    rating = models.FloatField(default=0.0)  # Puntuación de la película
+    release_date = models.DateField(blank=True, null=True)  # Fecha de estreno
+    category = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.title

@@ -17,14 +17,15 @@
         <h2 style="margin-top: 40px; color: pink; font-size: 30px; text-shadow: 2px 2px 5px black;">
             Sugerencias para ti
         </h2>
-        <div class="carousel-container" style="position: relative; max-width: 500px; margin: 30px auto; overflow: hidden;">
-            <div class="carousel" style="display: flex; transition: transform 0.5s ease-in-out;">
+        <div class="carousel-container" style="position: relative; max-width: 1000px; margin: 30px auto; overflow: hidden;">
+            <div class="carousel" style="display: flex; transition: transform 0.3s ease-in-out; gap: 20px;">
                 {% for movie in suggestions %}
-                    <div class="carousel-item" style="min-width: 100%; text-align: center;">
+                    <div class="carousel-item" style="min-width: 200px; text-align: center;">
                         <a href="{% url 'movie_detail' movie.id %}">
                             <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" 
                                  alt="{{ movie.title }}" 
-                                 style="border-radius: 8px; max-width: 100%; height: auto;">
+                                 class="carousel-image"
+                                 style="border-radius: 8px; width: 200px; height: auto;">
                         </a>
                         <h3 style="color: white; font-size: 18px; margin-top: 10px;">{{ movie.title }}</h3>
                     </div>
@@ -41,102 +42,162 @@
                 const items = document.querySelectorAll('.carousel-item');
                 let index = 0;
 
+                // Intervalo reducido para mostrar nuevas películas más rápido
                 setInterval(() => {
                     index = (index + 1) % items.length;
-                    carousel.style.transform = `translateX(-${index * 100}%)`;
-                }, 3000);
-            });
-        </script>
-    {% else %}
-        <!-- Título de bienvenida -->
-        <h1 class="zooming-title">
-            ¡Bienvenido a Peliculinchis!
-        </h1>
-        <p style="font-size: 20px; font-family: 'Arial', sans-serif; margin-top: 20px; color: white;">
-            Por favor, <a href="{% url 'login' %}" style="color: pink; text-decoration: none;">inicia sesión</a> o 
-            <a href="{% url 'register' %}" style="color: pink; text-decoration: none;">regístrate</a> para disfrutar de la experiencia completa.
-        </p>
-
-        <!-- Contenedor de imágenes flotantes -->
-        <div class="floating-images-container"></div>
-
-        <!-- Script para imágenes flotantes -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const container = document.querySelector(".floating-images-container");
-
-                // Lista de imágenes de películas sugeridas
-                const moviesAndSeries = [
-                    {% for movie in suggestions %}
-                        "https://image.tmdb.org/t/p/w500{{ movie.poster_path }}",
-                    {% endfor %}
-                ];
-
-                // Función para crear y mover imágenes
-                function createFloatingImage() {
-                    const img = document.createElement("img");
-                    img.src = moviesAndSeries[Math.floor(Math.random() * moviesAndSeries.length)];
-                    img.classList.add("floating-image");
-                    img.style.left = Math.random() * 100 + "vw"; // Posición horizontal aleatoria
-                    img.style.top = "100vh"; // Empieza desde abajo
-
-                    container.appendChild(img);
-
-                    // Animación hacia arriba
-                    setTimeout(() => {
-                        img.style.transform = "translateY(-120vh)"; // Sube fuera de la pantalla
-                        img.style.opacity = "0"; // Se desvanece
-                    }, 50);
-
-                    // Eliminar imagen después de la animación
-                    setTimeout(() => img.remove(), 15000); // Duración total de 15s
-                }
-
-                // Generar una nueva imagen cada 1.5 segundos
-                setInterval(createFloatingImage, 1500);
+                    carousel.style.transform = `translateX(-${index * 220}px)`; // Ajusta el desplazamiento considerando el gap
+                }, 2000); // Cambia cada 2 segundos
             });
         </script>
 
-        <!-- Estilo para imágenes flotantes -->
+        <!-- Estilos -->
         <style>
-            .floating-images-container {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
+            .carousel-container {
+                max-width: 1000px;
+                margin: 30px auto;
                 overflow: hidden;
-                z-index: -1;
-            }
-
-            .floating-image {
-                position: absolute;
-                width: 120px;
-                height: auto;
                 border-radius: 10px;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-                opacity: 1;
-                transition: transform 12s linear, opacity 12s ease-out;
+                position: relative;
             }
 
-            .zooming-title {
-                font-size: 50px;
-                font-family: 'Arial', sans-serif;
-                color: pink;
-                text-shadow: 2px 2px 5px black;
-                animation: zoomInOut 4s infinite;
+            .carousel {
+                display: flex;
+                gap: 20px; /* Espaciado entre imágenes */
+                transition: transform 0.3s ease-in-out;
             }
 
-            @keyframes zoomInOut {
-                0%, 100% {
-                    transform: scale(1);
-                }
-                50% {
-                    transform: scale(1.1);
-                }
+            .carousel-item {
+                min-width: 200px;
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .carousel-image {
+                border-radius: 8px;
+                width: 200px;
+                height: auto;
+                transition: transform 0.3s ease, filter 0.3s ease; /* Efecto suave */
+            }
+
+            .carousel-image:hover {
+                transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+                filter: brightness(1.2); /* Aclara ligeramente la imagen */
             }
         </style>
-    {% endif %}
+     {% else %}
+    <!-- Título de bienvenida -->
+<h1 class="zooming-title">
+    ¡Bienvenido a Peliculinchis!
+</h1>
+<p style="color: white; margin-top: 20px;">
+    <a href="{% url 'login' %}" style="color: pink; text-decoration: none;">Inicia sesión</a> o 
+    <a href="{% url 'register' %}" style="color: pink; text-decoration: none;">regístrate</a> para disfrutar de la experiencia completa.
+</p>
+
+<!-- Películas genéricas animadas -->
+<div class="floating-columns-container">
+    {% for col in "12345"|make_list %}
+        <div class="column {% if forloop.counter|divisibleby:2 %}upward{% else %}downward{% endif %}" 
+             style="--speed: {{ forloop.counter|add:15 }}s;">
+            {% for movie in suggestions %}
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" 
+                     class="floating-image" 
+                     alt="{{ movie.title }}">
+            {% endfor %}
+        </div>
+    {% endfor %}
 </div>
+
+<!-- Estilos -->
+<style>
+/* Contenedor general */
+.floating-columns-container {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* Columnas */
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* Sin separación */
+    animation: var(--direction) var(--speed) linear infinite;
+}
+
+/* Velocidades moderadas */
+.column.upward:nth-child(1) { --speed: 20s; }
+.column.downward:nth-child(2) { --speed: 22s; }
+.column.upward:nth-child(3) { --speed: 24s; }
+.column.downward:nth-child(4) { --speed: 26s; }
+.column.upward:nth-child(5) { --speed: 28s; }
+
+/* Dirección de las columnas */
+.column.upward {
+    --direction: moveUp;
+}
+
+.column.downward {
+    --direction: moveDown;
+}
+
+/* Imágenes */
+.floating-image {
+    width: 250px;
+    height: auto;
+    margin: 0;
+    border-radius: 10px;
+    filter: brightness(50%); /* Oscurecer las imágenes */
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.floating-image:hover {
+    transform: scale(1.1);
+    filter: brightness(70%); /* Aclara ligeramente al hacer hover */
+}
+
+/* Animaciones */
+@keyframes moveUp {
+    0% {
+        transform: translateY(100vh);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes moveDown {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/* Zooming título */
+.zooming-title {
+    font-size: 50px;
+    font-family: 'Arial', sans-serif;
+    color: pink;
+    text-shadow: 2px 2px 5px black;
+    animation: zoomInOut 4s infinite;
+}
+
+@keyframes zoomInOut {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+</style>
+{% endif %}
 {% endblock %}

@@ -8,21 +8,23 @@ from .forms import CustomUserCreationForm, UpdateUsernameForm, UserGenresForm, U
 from django.db.models import Q
 
 
-def home_view(request): 
+def home_view(request):
     if request.user.is_authenticated:
-        liked_movies = ViewedMovie.objects.filter(user=request.user, liked=True).values_list('movie_id', flat=True)
-        suggestions = Movie.objects.filter(~Q(id__in=liked_movies))[:10]
+        viewed_movies = ViewedMovie.objects.filter(user=request.user).values_list('movie_id', flat=True)
+
+        suggestions = Movie.objects.filter(~Q(id__in=viewed_movies))[:30]
     else:
-        suggestions = Movie.objects.all()[:10]
+        suggestions = Movie.objects.all()[:30]
+
     return render(request, 'movies/home.html', {'suggestions': suggestions})
 
 def movies_view(request):
     genre_id = request.GET.get('genre')
-    search_query = request.GET.get('search', '').strip()  # Obtener el término de búsqueda
+    search_query = request.GET.get('search', '').strip()
     genre_selected = None
     movies_query = Movie.objects.all()
 
-    # Filtrar por género si se selecciona uno
+
     if genre_id:
         try:
             genre_selected = Genre.objects.get(id=genre_id)
@@ -30,11 +32,10 @@ def movies_view(request):
         except Genre.DoesNotExist:
             genre_selected = None
 
-    # Filtrar por búsqueda si hay término ingresado
     if search_query:
         movies_query = movies_query.filter(title__icontains=search_query)
 
-    # Categorías solo cuando no hay género seleccionado ni búsqueda activa
+
     categorized_movies = None
     if not genre_selected and not search_query:
         categorized_movies = {
@@ -49,7 +50,7 @@ def movies_view(request):
         "genre_selected": genre_selected,
         "categorized_movies": categorized_movies,
         "movies": movies_query if genre_selected or search_query else None,
-        "search_query": search_query,  # Para mantener el término en el campo de búsqueda
+        "search_query": search_query,
     }
 
     return render(request, 'movies/movies.html', context)
@@ -57,7 +58,7 @@ def movies_view(request):
 
 def series_view(request):
     genre_id = request.GET.get('genre')
-    search_query = request.GET.get('search', '').strip()  # Obtener el término de búsqueda
+    search_query = request.GET.get('search', '').strip()
     genre_selected = None
     series_query = Series.objects.all()
 
