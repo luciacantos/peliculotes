@@ -7,6 +7,7 @@ env/
 venv/
 *.env
 
+
 # Django files
 db.sqlite3
 /media/
