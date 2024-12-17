@@ -27,4 +27,4 @@ static/
 Thumbs.db
 
 # GitHub Actions secrets
-.github/workflows/*.yml
+.github/workflows/*.ymln
